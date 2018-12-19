@@ -17,6 +17,10 @@ a {
     text-decoration: none;
     color: #002CF5; }
 
+p {
+ font-family: droid-serif;
+ line-height: 29px; }
+
 h1, h2, h3, h4, h5,
 .h1, .h2, .h3, .h4, .h5 {
   line-height: 1.45;
@@ -188,7 +192,8 @@ h1, h2, h3, h4, h5,
   @media screen and (max-width: 768px) {
     .probootstrap-main {
       width: 100%;
-      padding: 30px 15px; } }
+      padding: 30px 15px;
+      padding-top: 65px; } }
   @media screen and (max-width: 1140px) {
     .probootstrap-main .card-columns {
       -webkit-columns: 3;
