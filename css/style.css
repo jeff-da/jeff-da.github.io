@@ -29,11 +29,17 @@ p {
  font-family: droid-serif;
  line-height: 29px; }
 
-h1, h2, h3, h4, h5,
-.h1, .h2, .h3, .h4, .h5 {
+h2, h3, h4, h5,
+.h2, .h3, .h4, .h5 {
   line-height: 1.45;
   font-weight: normal;
   color: #000; }
+
+h1, .h1 {
+   font-size:60px;
+   line-height: 1.15;
+   font-weight: bold;
+   color: #000; }
 
 h6, .h6 {
    color: #000;
