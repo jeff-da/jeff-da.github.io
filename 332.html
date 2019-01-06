@@ -10,7 +10,7 @@
 
      gtag('config', 'UA-131211058-1');
     </script>
-    <title>Jeff Da - CSE332</title>
+    <title>CSE 332 - Jeff Da</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Jeff Da" />
@@ -39,11 +39,11 @@
       </div>
       <div class="probootstrap-overflow">
         <nav class="probootstrap-nav">
-          <ul>
-            <li class="probootstrap-animate" data-animate-effect="fadeInLeft"><a href="index">Home</a></li>
-            <li class="probootstrap-animate active" data-animate-effect="fadeInLeft"><a href="332">Data Structures</a></li>
-            <li class="probootstrap-animate" data-animate-effect="fadeInLeft"><a href="blog">Writing</a></li>
-          </ul>
+
+            <li class="probootstrap-animate" data-animate-effect="fadeInLeft"><a href="index">Home</a>
+            <li class="probootstrap-animate active" data-animate-effect="fadeInLeft"><a href="332">Data Structures</a>
+            <li class="probootstrap-animate" data-animate-effect="fadeInLeft"><a href="blog">Writing</a>
+
         </nav>
       </div>
     </aside>
@@ -55,8 +55,131 @@
         <div class="probootstrap-main-site-logo"><a href="index.html">Jeff Da</a></a></div>
       </div>
       <p>
-         <h1>Hi, I'm Jeff...</h1>
-         Hello
+         <h1>CSE 332 Resources</h1>
+         <p>Contact me: <a href="mailto:i@jeffda.com">jzda (at) cs.washington.edu</a><br>
+         Anonymous feedback form: <a href="https://docs.google.com/forms/d/e/1FAIpQLSeF1IfkqNUDgIRAaQjeWMrCQY5QEpC6Ce4pVFUdnUyAnzBfGQ/viewform?usp=sf_link">link</a>.</p>
+         <h5>General Resources</h5>
+         <p>Course website: <a href="https://courses.cs.washington.edu/courses/cse332/19wi/">link</a>.<br>
+         Free textbook PDF (but in C++): <a href="http://iips.icci.edu.iq/images/exam/DataStructuresAndAlgorithmAnalysisInCpp_2014.pdf">link</a>.
+         </p>
+
+         <h5>Java</h5>
+
+         <p>
+         Java syntax practice problems: <a href="http://codingbat.com/java">link</a>.<br>
+         OpenJDK source, i.e., how Java built-in classes are implemented: <a href="http://grepcode.com/snapshot/repository.grepcode.com/java/root/jdk/openjdk/8u40-b25/">link</a>.<br>
+
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For example, here's how Java's real HashMap is implemented: <a href="http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/8u40-b25/java/util/HashMap.java?av=f">link</a>.<br>
+
+         <a href="http://javadude.com/articles/passbyvalue.htm">"Java is Pass-by-Value, Dammit!"</a> by Scott Stanchfield.<br>
+         A quick guide to method selection: <a href="https://docs.google.com/presentation/d/1N8dhPhOEJMgT0SbJm2rywf1Bxp5iIyZ2hLos-DJ71SE/edit#slide=id.p">link</a>.<br>
+         How to use comments effectively: <a href="http://testing.googleblog.com/2017/07/code-health-to-comment-or-not-to-comment.html?m=1">link</a>.<br>
+
+      </p>
+
+         <h5>Git</h5>
+
+         <p>
+         GitHub's Git tutorial: <a href="https://try.github.io/">link</a>.<br>
+
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Git is the name of the version control software. It's free and open source. GitHub is a company that hosts Git repositories (repos). You can use it as a central Git server for your projects.<br>
+
+         How to fix common Git problems: <a href="http://ohshitgit.com/">link</a>.<br>
+         Make your shell Git-friendly with <a href="https://git-scm.com/book/en/v1/Git-Basics-Tips-and-Tricks#Auto-Completion">autocompletion</a> and <a href="https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh">prompt support</a>.<br>
+
+         <a href="https://wildlyinaccurate.com/a-hackers-guide-to-git/">"A Hacker's Guide to Git"</a> by Joseph Wynn.<br>
+
+      </p>
+
+         <h5>Asymptotics</h5>
+
+         <p>
+         The single most confusing topic in asymptotics is the difference between best-case/worst-case and big-O/Theta/Omega.<br>
+
+         Big-O/Theta/Omega describes the runtime of an algorithm in one or multiple cases. Best-case/worst-case describes a particular <em>input</em> case for an algorithm.<br>
+         <br>Here's an example: "The worst-case runtime for quicksort is Theta(n^2)."<br><br>
+
+         Notice how "worst-case" describes the <em>input</em>. For example, for quicksort where the first element is chosen as the pivot, the worst-case input is an already-sorted list.<br>
+
+         What's confusing is that I could also say, "The runtime for quicksort is O(n^2)."<br>
+
+         This is a more general statement: I'm implying that this statement is true for <em>all</em> cases/inputs.<br>
+         Notice that this does <em>not</em> imply that the worst-case runtime of quicksort is Theta(n^2) (why not?).<br>
+
+
+         You can't perform asymptotic analysis just by blindly following rules like "multiply for nested loops".<br>
+         <br>Common sums:<br>
+
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sum of numbers: 1 + 2 + 3 + 4 + ... + n = Theta(n^2).<br>
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sum of squares: 1 + 4 + 9 + 16 + ... + n^2 = Theta(n^3).<br>
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Geometric sum: 1 + 2 + 4 + 8 + ... + n = Theta(n).<br>
+
+         Uncommon sums:<br>
+
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sum of logs: log(1) + log(2) + log(3) + log(4) + ... + log(n) = log(n!) = Theta(n log n).<br>
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sum of subarray lengths: (n)(1) + (n-1)(2) + ... + (2)(n-1) + (1)(n) = Theta(n^3).<br>
+
+         <h5>Heaps</h5>
+
+         <p>
+
+         Students tend to confuse heaps and BSTs. Do <em>you</em> know what the differences are?<br>
+         Visualizer: <a href="https://www.cs.usfca.edu/~galles/visualization/Heap.html">link</a>.<br>
+         Proof that bottom-up heapify takes linear time: <a href="https://www.cs.umd.edu/~meesh/351/mount/lectures/lect14-heapsort-analysis-part.pdf">link</a> (see the "BuildHeap Analysis" section).<br>
+
+      </p>
+
+         <h5>Inspiration and Wisdom</h5>
+
+         <p><a href="https://xkcd.com/297/">
+         <img src="https://imgs.xkcd.com/comics/tree.png" alt="xkcd comic" title="Source: xkcd (CC-BY-NC)">
+         </a></p>
+         <p>
+
+         <a href="http://thecodelesscode.com/case/195">"The Magician's Code"</a> from <em>The Codeless Code</em>.<br>
+         <a href="http://joelonsoftware.com/articles/CollegeAdvice.html">"Advice for Computer Science College Students"</a> from Joel Spolsky, blogger extraordinaire and cofounder of Stack Overflow (among other things).<br>
+         <a href="https://lwn.net/2000/0824/a/esr-sharing.php3">"The Curse of the Gifted"</a> by Eric S. Raymond, in an email to Linus Torvalds, creator of Linux and Git.<br>
+         <a href="http://www.pgbovine.net/productivity-tips.htm">"How To Be Effective"</a> by Philip J. Guo (no relation), professor at UCSD and creator of Python Tutor.<br>
+         <a href="https://blog.samaltman.com/productivity">"Productivity"</a> by Sam Altman, president of YC. Also read <a href="https://blog.samaltman.com/the-days-are-long-but-the-decades-are-short">this</a>.<br>
+         Some random guy <a href="https://groups.google.com/forum/#!search/larry$20sanger$20java$201996/comp.lang.java/aSPAJO05LIU/ushhUIQQ-ogJ">asking a question</a> (in 1996) about his Java web crawler, which would eventually become <a href="https://en.wikipedia.org/wiki/Google">kind of a big deal</a>. Don't be afraid to ask questions!<br>
+
+      </p>
+
+         <h5>Internships and Interviews</h5>
+
+         <p>
+
+         If you have any interest at all in working in software development in the future, I highly recommend you apply for internships this cycle, even if you don't feel ready.<br>
+
+         At the very least, you'll get a feel for what the process is like and what employers are looking for.<br><br>
+
+         <a href="http://alexeymk.com/a-brief-guide-to-tech-internships/">"A Brief Guide to Tech Internships"</a> by Alexey Komissarouk.<br>
+
+         What your resume should look like: <a href="https://www.reddit.com/r/cscareerquestions/comments/25u0eo/could_we_create_a_basic_undergrad_resume/chktg4y/">link</a>.<br>
+         For interview practice, I (like everyone else) recommend <em><a href="https://smile.amazon.com/gp/product/0984782850/ref=pd_sbs_14_t_0?ie=UTF8&amp;psc=1&amp;refRID=5FQD69BDFX5C08415N34">Cracking the Coding Interview</a></em>.<br>
+
+         Find a buddy, reserve a library room with a whiteboard, and take turns interviewing each other.<br>
+         Study the problem-solving flowchart from the book: <a href="https://www.slideshare.net/gayle2/cracking-the-interview-skills-coding-soft-skills-product-management-handouts">link</a>.<br>
+
+         Tip: Keep a list of interesting technical questions that you've encountered, including the solutions.<br>
+
+         Review the list often and add to it after every practice session.<br>
+         Before every real interview, go through the entire list and make sure you know everything on it.<br><br>
+
+         Coding interview tips from Interview Cake: <a href="https://www.interviewcake.com/article/python/coding-interview-tips">link</a>.<br>
+         A list of coding questions by Max Noy: <a href="http://maxnoy.com/interviews.html">link</a>.<br>
+         An even bigger list by Program Creek: <a href="http://www.programcreek.com/2012/11/top-10-algorithms-for-coding-interview/">link</a>.<br>
+         A still bigger list by Vivek Srivastava: <a href="https://techiedelight.quora.com/500-Data-structures-and-algorithms-interview-questions-and-their-solutions">link</a>.<br>
+         Leetcode allows you to mock interview yourself by testing your code: <a href="http://leetcode.com/">link</a>.
+         Pramp allows you to mock interview with a real person: <a href="https://www.pramp.com/">link</a>.
+
+
+      </p>
+
+         <h5>I Still Have Questions!</h5>
+
+         <p>Don't hesitate to email me (<a href="mailto:i@jeffda.com">jzda (at) cs.washington.edu</a>).</p>
+
       </p>
 
     </main>
