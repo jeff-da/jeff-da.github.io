@@ -89,35 +89,7 @@
          <a href="https://wildlyinaccurate.com/a-hackers-guide-to-git/">"A Hacker's Guide to Git"</a> by Joseph Wynn.<br>
 
       </p>
-
-         <h5>Asymptotics</h5>
-
-         <p>
-         The single most confusing topic in asymptotics is the difference between best-case/worst-case and big-O/Theta/Omega.<br>
-
-         Big-O/Theta/Omega describes the runtime of an algorithm in one or multiple cases. Best-case/worst-case describes a particular <em>input</em> case for an algorithm.<br>
-         <br>Here's an example: "The worst-case runtime for quicksort is Theta(n^2)."<br><br>
-
-         Notice how "worst-case" describes the <em>input</em>. For example, for quicksort where the first element is chosen as the pivot, the worst-case input is an already-sorted list.<br>
-
-         What's confusing is that I could also say, "The runtime for quicksort is O(n^2)."<br>
-
-         This is a more general statement: I'm implying that this statement is true for <em>all</em> cases/inputs.<br>
-         Notice that this does <em>not</em> imply that the worst-case runtime of quicksort is Theta(n^2) (why not?).<br>
-
-
-         You can't perform asymptotic analysis just by blindly following rules like "multiply for nested loops".<br>
-         <br>Common sums:<br>
-
-         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sum of numbers: 1 + 2 + 3 + 4 + ... + n = Theta(n^2).<br>
-         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sum of squares: 1 + 4 + 9 + 16 + ... + n^2 = Theta(n^3).<br>
-         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Geometric sum: 1 + 2 + 4 + 8 + ... + n = Theta(n).<br>
-
-         Uncommon sums:<br>
-
-         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sum of logs: log(1) + log(2) + log(3) + log(4) + ... + log(n) = log(n!) = Theta(n log n).<br>
-         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sum of subarray lengths: (n)(1) + (n-1)(2) + ... + (2)(n-1) + (1)(n) = Theta(n^3).<br>
-
+      
          <h5>Heaps</h5>
 
          <p>
