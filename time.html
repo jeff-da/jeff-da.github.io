@@ -98,7 +98,7 @@
                 month = days[Math.floor(dayOfTheYear / 14)].toUpperCase();
             }
 
-            var day = diffDays % 14;
+            var day = (diffDays - (year * 365)) % 14;
 
             // Formatting.
             year = year % 100;
