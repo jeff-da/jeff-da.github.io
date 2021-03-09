@@ -26,11 +26,11 @@
       <p> Undergraduate at the University of Washington (graduated 2020, magma cum laude)</p>
       <p> My research is in natural language processing, on robustness and interpretation of large-scale LMs.
       </p>
-      <p> I was vice chair of ACM, director of Dubhacks, and led the student advisory council at UW CSE.</a>
-      <p> Contemporaneously, I was an engineer at Facebook, Palantir Technologies, and <a href="https://expo.io">Expo</a>.
+      <p> Previously, I was an engineer at Facebook, Palantir Technologies, and <a href="https://expo.io">Expo</a>.
       </p>
       <p>jzda [æt] cs.washington.edu</p>
       <p><a href="https://github.com/pages-themes/minimal">Want the website code?</a></p>
+      <p>Today, it is <a id="p1" href="https://jeffda.com/time"></a>.</p>
       <!-- <p> I <a href="https://www.youtube.com/watch?v=38rf9FLhl-8">juggle</a>! I am an anticapitalist.</p> -->
       <!-- <p>A Theme for GitHub Pages</p> -->
       <!-- <p class="view"><a href="http://github.com/orderedlist/minimal">View the Project on GitHub <small>orderedlist/minimal</small></a></p> -->
@@ -131,6 +131,57 @@
         </ul> -->
 
     <script src="javascripts_personal/scale.fix.js"></script>
+
+    <script>
+      var date2 = new Date();
+      var date1 = new Date("03/08/2021");
+      var diffTime = Math.abs(date2 - date1);
+      var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) - 1;
+
+      // How many YEARS have passed?
+      var year = Math.floor(diffDays / 365)
+
+      // What is the current MONTH?
+      var dayOfTheYear = diffDays - (year * 365)
+      var month = ""
+      if (dayOfTheYear === 365) {
+          month = "+"
+      } else {
+          var days = 'abcdefghijklmnopqrstuvwxyz'.split('');
+          month = days[Math.floor(dayOfTheYear / 14)].toUpperCase();
+      }
+
+      var day = diffDays % 14;
+
+      // Formatting.
+      year = year % 100;
+      if (year < 10) {
+          year = "0" + year;
+      }
+
+      if (day < 10) {
+          day = "0" + day;
+      }
+
+      var mins = date2.getMinutes(); // date2 is "today"
+
+      if (mins < 10) {
+          mins = "0" + mins;
+      }
+
+      var hours = date2.getHours();
+
+      if (hours < 10) {
+          hours = "0" + hours;
+      }
+
+      // This would make a great programming question!
+      // TODO: leap years
+
+      dateTime = "" + day + month + year;
+
+      document.getElementById("p1").innerHTML = dateTime;
+  </script>
 </body>
 
 </html>
