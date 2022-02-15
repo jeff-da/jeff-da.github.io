@@ -51,8 +51,6 @@
                 hours = "0" + hours;
             }
 
-            // This would make a great programming question!
-
             dateTime = "" + hours + ":" + mins + " " + day + month + year;
 
             var currentTime = new Date();
@@ -76,7 +74,7 @@
             }
 
             document.getElementById("clock").innerHTML = "<b><div id='d1'>" + hours + ":" +
-                minutes + ":" + seconds + " " + suffix + " " + year + month + day + "</div></b>";
+                minutes + ":" + seconds + " " + suffix + " " + "</div></b>";
         }
 
         setInterval(function() {
@@ -147,7 +145,7 @@
             // Time since phone, fap, and taking care of my body
 
             document.getElementById("clock").innerHTML = "<b><div id='d1'>" + hours + ":" +
-                minutes + ":" + seconds + "</div></b>";
+                minutes + ":" + seconds + " " + suffix + "</div></b>";
             }, 1000);
         </script>   
     </body>
