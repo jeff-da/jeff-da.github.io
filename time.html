@@ -14,8 +14,8 @@
                }
              }
             var currentDate = new Date();
-            var imageNumber = currentDate.getDay() % 4;
-            document.write('<img src="images/dates/' + imageNumber + '.gif" style="width:500px; border: solid white 4px;"></a></center>');
+            var imageNumber = currentDate.getDay() % 1;
+            document.write('<img src="images/seattle/' + imageNumber + '.gif" style="width:500px; border: solid white 4px;"></a></center>');
             // document.write('<img src="' + imlocation + image[imagenumber] + '">');
         </script>
         <script>
@@ -152,8 +152,6 @@
             if (hours == 0) {
                 hours = 12;
             }
-
-            // Time since phone, fap, and taking care of my body
 
             document.getElementById("clock").innerHTML = "<b><div id='d1'>" + hours + ":" +
                 minutes + ":" + seconds + " " + suffix + "</div></b>";
