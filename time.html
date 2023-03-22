@@ -14,8 +14,8 @@
                }
              }
             var currentDate = new Date();
-            var imageNumber = currentDate.getDay() % 14;
-            document.write('<img src="images/seattle/' + imageNumber + '.gif" style="width:500px; border: solid white 4px;"></a></center>');
+            var rand = Math.floor(Math.random() * (13 + 1));
+            document.write('<img src="images/seattle/' + rand + '.gif" style="width:500px; border: solid white 4px;"></a></center>');
             // document.write('<img src="' + imlocation + image[imagenumber] + '">');
         </script>
         <script>
