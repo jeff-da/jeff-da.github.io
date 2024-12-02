@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>A Careful Examination of Large Language Model Performance on Grade School Arithmetic</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>A Careful Examination of Large Language Model Performance on Grade School Arithmetic</h1>
+        <p>View Scale AI's offical website here: <a href="https://scale.com/research/llm-performance-grade-school-arithmetic">https://scale.com/research/llm-performance-grade-school-arithmetic</a></p>
+        <p>Large language models (LLMs) have achieved impressive success on many benchmarks for mathematical reasoning. However, there is growing concern that some of this performance actually reflects dataset contamination, where data closely resembling benchmark questions leaks into the training data, instead of true reasoning ability. To investigate this claim rigorously, we commission <strong>Grade School Math 1000 (GSM1k)</strong>. GSM1k is designed to mirror the style and complexity of the established GSM8k benchmark, the gold standard for measuring elementary mathematical reasoning.</p>
+        <ul>
+          <li><a href="https://github.com/scaleapi/gsm1k_eval">View <strong>Github</strong></a></li>
+          <li><a href="https://arxiv.org/abs/2405.00332">Read on <strong>arXiv</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <img src="./images/paper_images/gsm1k.png" alt="GSM1k" width="500">
+
+        <p>This paper addresses concerns about dataset contamination in LLMs by introducing the Grade School Math 1000 (GSM1k) benchmark, designed to match the style and complexity of the widely-used GSM8k benchmark for mathematical reasoning. The research shows that many models, including Phi and Mistral, experience accuracy drops of up to 13% on GSM1k, indicating systematic overfitting, while frontier models like GPT and Claude show minimal overfitting. A positive correlation (Spearman’s r² = 0.32) was found between a model's likelihood of generating examples from GSM8k and the performance gap between GSM8k and GSM1k, suggesting partial memorization of GSM8k by some models.
+          
+        <p>The paper evaluated LLMs on both the GSM8k and GSM1k benchmarks using a standardized evaluation setup for fair comparison. Open-source models were tested using EleutherAI's LM Evaluation Harness, and closed-source models were queried through the LiteLLM library. All models were tested with identical prompts using five examples from the GSM8k train set. Results indicate that some lesser-known models, particularly those near the top of the OpenLLMLeaderboard, performed significantly worse on GSM1k, suggesting they may have over-optimized for GSM8k, in line with Goodhart’s law. 
+
+        </p>
+
+        <h1>Authors</h1>
+
+        This work was done by a team of researchers from Scale AI. <br> <br>
+        <p>Hugh Zhang, Jeff Da, Dean Lee, Vaughn Robinson, Catherine Wu, Will Song, Tiffany Zhao, Pranav Raja, Dylan Slack, Qin Lyu, Sean Hendryx, Russell Kaplan, Michele (Mike) Lunati†, Summer Yue†</p>
+      </section>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>
