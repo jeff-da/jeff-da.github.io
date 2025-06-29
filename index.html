@@ -8,8 +8,59 @@
     <meta name="author" content="Jeff Da">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="images/favicon/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      }
+      .name {
+        font-size: 32px;
+        font-weight: bold;
+        margin: 20px 0;
+      }
+      .papertitle {
+        font-weight: bold;
+        color: #333;
+        text-decoration: none;
+      }
+      .papertitle:hover {
+        color: #0066cc;
+      }
+      a {
+        color: #0066cc;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      h2 {
+        font-size: 24px;
+        margin: 30px 0 20px 0;
+      }
+      p {
+        margin: 10px 0;
+      }
+      /* Fix for image centering */
+      .paper-image-cell {
+        padding: 16px;
+        width: 20%;
+        vertical-align: middle !important;
+        text-align: center;
+      }
+      .paper-content-cell {
+        padding: 16px 8px;
+        width: 80%;
+        vertical-align: middle !important;
+      }
+      .paper-image {
+        width: 160px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+    </style>
   </head>
 
   <body>
@@ -22,16 +73,12 @@
                 <p class="name" style="text-align: center;">
                   Jeff Da
                 </p>
-                <p>I'm a senior research scientist at <a href="https://scale.com/">Scale AI</a>, where I'm on the Gen AI ML team. I work on language model post-training, alignment, and evaluation.
-                </p>
-                <p>
-                  Previously, I was at Amazon, and before that, I was a Predoctoral Young Investigator working with Antoine Bosselut and Yejin Choi on commonsense reasoning and multimodality.
-                </p>
-                <p style="text-align:center">
-                  <a href="mailto:jefzda@gmail.com">Email</a> &nbsp;/&nbsp;
-                  <a href="https://scholar.google.com/citations?user=cJxpdbEAAAAJ&hl=en">Google Scholar</a> &nbsp;/&nbsp;
-                  <a href="https://x.com/_jeffda?lang=en">Twitter</a> &nbsp;/&nbsp;
-                  <a href="https://github.com/jeff-da">Github</a>
+                <p>I'm currently a research scientist at <a href="https://scale.com/">Scale AI</a>.</p>
+                <p>At Scale, I lead research on reinforcement learning, agents, and post-training. Prior to Scale, I was at the <a href="">Allen Institute for AI</a> and University of Washington, where I did research on a variety of topics in reasoning, evals, and multimodality. I worked with <a href="">Yejin Choi</a>, with additional mentorship from <a href="">Antoine Bosselut</a>, <a href="">Maxwell Forbes</a>, and many other amazing collaborators.</p>
+                <p style="text-align:left">
+                  <a href="https://scholar.google.com/citations?user=cJxpdbEAAAAJ&hl=en">[Google Scholar]</a>
+                  <a href="https://x.com/_jeffda?lang=en">[Twitter]</a>
+                  <a href="https://github.com/jeff-da">[Github]</a>
                 </p>
               </td>
               <td style="padding:2.5%;width:37%;max-width:37%">
@@ -39,6 +86,18 @@
               </td>
             </tr>
           </tbody></table>
+
+          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+            <tr>
+              <td style="padding:16px;width:100%;vertical-align:middle">
+                <h2>Blog</h2>
+                <ul>
+                  <li><a href="https://www.overleaf.com/read/mprnnszgjrdy#85ac22">Agent Alignment: Implications of Scaling RL</a></li>
+                </ul>
+              </td>
+            </tr>
+          </tbody></table>
+
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
             <tr>
             <td style="padding:16px;width:100%;vertical-align:middle">
@@ -46,15 +105,30 @@
             </td>
           </tr>
         </tbody></table>
+        
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
           <!-- Start of Research Papers -->          
           <tr>
-            <td style="padding:16px;width:20%;vertical-align:middle">
-              <div class="one">
-                <div class="two"><img src='images/paper_images/gsm1k.png' width="160"></div>
-              </div>
+            <td class="paper-image-cell">
+              <img src="images/paper_images/agentrlvr.png" class="paper-image" alt="Agent-RLVR">
             </td>
-            <td style="padding:8px;width:80%;vertical-align:middle">
+            <td class="paper-content-cell">
+              <a href="https://arxiv.org/abs/2506.11425">
+                <span class="papertitle">Agent-RLVR: Training Software Engineering Agents via Guidance and Environment Rewards</span>
+              </a>
+              <br>
+              <strong>Jeff Da</strong>, Clinton Wang, Xiang Deng, Yuntao Ma, Nikhil Barhate, Sean Hendryx
+              <br>
+              <em>arxiv</em>, 2025
+              <br>
+              <p>We introduce Agent-RLVR, a novel reinforcement learning technique via teacher-student multi-agent co-evolution. To that end, we train SWE-Agents using RL and verifiable rewards that significantly improve upon the base model.</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="paper-image-cell">
+              <img src="images/paper_images/gsm1k.png" class="paper-image" alt="GSM1k">
+            </td>
+            <td class="paper-content-cell">
               <a href="https://arxiv.org/abs/2405.00332">
                 <span class="papertitle">A Careful Examination of Large Language Model Performance on Grade School Arithmetic</span>
               </a>
@@ -68,12 +142,10 @@
           </tr>
           
           <tr>
-            <td style="padding:16px;width:20%;vertical-align:middle">
-              <div class="one">
-                <div class="two"><img src='images/paper_images/rm.png' width="160"></div>
-              </div>
+            <td class="paper-image-cell">
+              <img src="images/paper_images/rm.png" class="paper-image" alt="Reward Models">
             </td>
-            <td style="padding:8px;width:80%;vertical-align:middle">
+            <td class="paper-content-cell">
               <a href="https://arxiv.org/pdf/2407.13887">
                 <span class="papertitle">Learning Goal-Conditioned Representations for Language Reward Models</span>
               </a>
@@ -86,12 +158,10 @@
             </td>
           </tr>
           <tr>
-            <td style="padding:16px;width:20%;vertical-align:middle">
-              <div class="one">
-                <div class="two"><img src='images/paper_images/nycc.png' width="160"></div>
-              </div>
+            <td class="paper-image-cell">
+              <img src="images/paper_images/nycc.png" class="paper-image" alt="New Yorker Caption Contest">
             </td>
-            <td style="padding:8px;width:80%;vertical-align:middle">
+            <td class="paper-content-cell">
               <a href="https://aclanthology.org/2023.acl-long.41.pdf">
                 <span class="papertitle">Do Androids Laugh at Electric Sheep? Humor Understanding Benchmarks from the New Yorker Caption Contest</span>
               </a>
@@ -104,12 +174,10 @@
             </td>
           </tr>
           <tr>
-            <td style="padding:16px;width:20%;vertical-align:middle">
-              <div class="one">
-                <div class="two"><img src='images/paper_images/fewshot.png' width="160"></div>
-              </div>
+            <td class="paper-image-cell">
+              <img src="images/paper_images/fewshot.png" class="paper-image" alt="Few-shot Learning">
             </td>
-            <td style="padding:8px;width:80%;vertical-align:middle">
+            <td class="paper-content-cell">
               <a href="https://arxiv.org/abs/2101.00297">
                 <span class="papertitle">Analyzing Commonsense Emergence in Few-shot Knowledge Models
                 </span>
@@ -123,12 +191,10 @@
             </td>
           </tr>
           <tr>
-            <td style="padding:16px;width:20%;vertical-align:middle">
-              <div class="one">
-                <div class="two"><img src='images/paper_images/emu.png' width="160"></div>
-              </div>
+            <td class="paper-image-cell">
+              <img src="images/paper_images/emu.png" class="paper-image" alt="EMU Frames">
             </td>
-            <td style="padding:8px;width:80%;vertical-align:middle">
+            <td class="paper-content-cell">
               <a href="https://arxiv.org/abs/2012.04726">
                 <span class="papertitle">Edited Media Understanding: Reasoning About Implications of Manipulated Images</span>
               </a>
@@ -141,12 +207,10 @@
             </td>
           </tr>
           <tr>
-            <td style="padding:16px;width:20%;vertical-align:middle">
-              <div class="one">
-                <div class="two"><img src='images/paper_images/discourse.png' width="160"></div>
-              </div>
+            <td class="paper-image-cell">
+              <img src="images/paper_images/discourse.png" class="paper-image" alt="Discourse Understanding">
             </td>
-            <td style="padding:8px;width:80%;vertical-align:middle">
+            <td class="paper-content-cell">
               <a href="https://arxiv.org/pdf/1907.01272"><span class="papertitle">Discourse Understanding and Factual Consistency in Abstractive Summarization</span></a>
               <br>
               Saadia Gabriel, Antoine Bosselut, Jeff Da, Ari Holtzman, Jan Buys, Kyle Lo, Asli Celikyilmaz, Yejin Choi
@@ -157,12 +221,10 @@
             </td>
           </tr>
           <tr>
-            <td style="padding:16px;width:20%;vertical-align:middle">
-              <div class="one">
-                <div class="two"><img src='images/paper_images/comet.png' width="160"></div>
-              </div>
+            <td class="paper-image-cell">
+              <img src="images/paper_images/comet.png" class="paper-image" alt="COMET-ATOMIC">
             </td>
-            <td style="padding:8px;width:80%;vertical-align:middle">
+            <td class="paper-content-cell">
               <a href="https://arxiv.org/abs/2010.05953">
                 <span class="papertitle">COMET-ATOMIC 2020: On Symbolic and Neural Commonsense Knowledge Graphs</span>
               </a>
@@ -175,12 +237,10 @@
             </td>
           </tr>
           <tr>
-            <td style="padding:16px;width:20%;vertical-align:middle">
-              <div class="one">
-                <div class="two"><img src='images/paper_images/commonsense.png' width="160"></div>
-              </div>
+            <td class="paper-image-cell">
+              <img src="images/paper_images/commonsense.png" class="paper-image" alt="Commonsense Reasoning">
             </td>
-            <td style="padding:8px;width:80%;vertical-align:middle">
+            <td class="paper-content-cell">
               <a href="https://arxiv.org/abs/1910.01157">
                 <span class="papertitle">Cracking the Contextual Commonsense Code: Understanding commonsense reasoning capabilities of contextual representations</span>
               </a>
@@ -193,12 +253,10 @@
             </td>
           </tr>
           <tr>
-            <td style="padding:16px;width:20%;vertical-align:middle">
-              <div class="one">
-                <div class="two"><img src='images/paper_images/bigmood.png' width="160"></div>
-              </div>
+            <td class="paper-image-cell">
+              <img src="images/paper_images/bigmood.png" class="paper-image" alt="BIG MOOD">
             </td>
-            <td style="padding:8px;width:80%;vertical-align:middle">
+            <td class="paper-content-cell">
               <a href="https://arxiv.org/abs/1910.07713">
                 <span class="papertitle">BIG MOOD: Relating Transformers to Explicit Commonsense Knowledge</span>
               </a>
@@ -212,7 +270,8 @@
           </tr>
           <!-- End of Research Papers -->
         </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+        
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
             <tr>
               <td style="padding:0px">
                 <br>
