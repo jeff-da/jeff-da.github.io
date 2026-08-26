@@ -1,0 +1,8 @@
+body{font-family:Georgia,serif;max-width:46em;margin:2.5em auto;padding:0 1em;line-height:1.55;color:#1a1a1a;background:#fdfdfc}
+h1{font-size:1.35em;border-bottom:1px solid #ccc;padding-bottom:.3em}h2{font-size:1.05em;margin-top:1.6em}
+code,.mono{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:#f2f1ee;padding:.08em .3em;border-radius:3px}
+.tag{display:inline-block;background:#eee;border:1px solid #ddd;border-radius:3px;padding:.05em .5em;margin:0 .3em .3em 0;font-size:.82em}
+.fix{background:#f4f8f1;border-left:3px solid #7a9e6a;padding:.7em 1em;margin:1em 0}
+.ev{background:#f7f6f3;border-left:3px solid #bbb;padding:.6em 1em;margin:.6em 0;font-size:.94em}
+a{color:#28518f}table{border-collapse:collapse;width:100%;font-size:.92em}td,th{border:1px solid #ddd;padding:.35em .6em;text-align:left}
+.small{color:#666;font-size:.85em}

